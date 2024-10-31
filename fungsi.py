@@ -236,7 +236,6 @@ class miladi:
 #print(miladi().bulan_miladi("Januari"))  # Output
 
 import math
-from petahilal import *  # Pastikan modul ini ada dan berfungsi dengan baik
 
 class caldat:
 
