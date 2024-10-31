@@ -238,7 +238,7 @@ class miladi:
 import math
 from petahilal import *  # Pastikan modul ini ada dan berfungsi dengan baik
 
-class CalDat:
+class caldat:
 
     def __init__(self, jd, timezone=0.0, pilihan=None):
         self.jd = jd
