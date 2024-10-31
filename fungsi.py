@@ -250,32 +250,32 @@ class caldat:
         
         # Mengatur hasil berdasarkan pilihan
         if pilihan == "HARI":
-            self.final_result = self.hari_str
+            self.result = self.hari_str
         elif pilihan == "PASARAN":
-            self.final_result = self.pasaran_str
+            self.result = self.pasaran_str
         elif pilihan == "HARPAS":
-            self.final_result = f"{self.hari_str} {self.pasaran_str}"
+            self.result = f"{self.hari_str} {self.pasaran_str}"
         elif pilihan == "TANGGAL":
-            self.final_result = f"{tgl:02d} {fungsi.miladi().bulan_miladi(self.bln)} {self.thn:04d}"
+            self.result = f"{tgl:02d} {miladi().bulan_miladi(self.bln)} {self.thn:04d}"
         elif pilihan == "JAM":
-            self.final_result = fungsi.konversi(self.jam, "JAM").result()
+            self.result = konversi(self.jam, "JAM").result()
         elif pilihan == "JDJAM":
-            self.final_result = self.jam
+            self.result = self.jam
         elif pilihan == "JDTANGGAL":
-            self.final_result = self.tgl
+            self.result = self.tgl
         elif pilihan == "JDBULAN":
-            self.final_result = self.bln
+            self.result = self.bln
         elif pilihan == "JDTAHUN":
-            self.final_result = self.thn
+            self.result = self.thn
         elif pilihan == "JD_LENGKAP":
-            self.final_result = f"{self.tgl}\t{self.bln}\t{self.thn}\t{self.hari_str}\t{self.pasaran_str}"
+            self.result = f"{self.tgl}\t{self.bln}\t{self.thn}\t{self.hari_str}\t{self.pasaran_str}"
         elif pilihan == "JD_HP":
-            self.final_result = f"{self.hari_str}\t{self.pasaran_str}"
+            self.result = f"{self.hari_str}\t{self.pasaran_str}"
         elif pilihan == "PHASES":
-            a = fungsi.konversi(self.jam, "JAM").result()
-            self.final_result = f"{self.tgl:02d} {fungsi.miladi().bulan_miladi(self.bln)} {self.thn:04d} Jam {a}"
+            a = konversi(self.jam, "JAM").result()
+            self.result = f"{self.tgl:02d} {fungsi.miladi().bulan_miladi(self.bln)} {self.thn:04d} Jam {a}"
         else:
-            self.final_result = f"{self.hari_str} {self.pasaran_str}, {self.tgl:02d} {fungsi.miladi().bulan_miladi(self.bln)} {self.thn:04d}"
+            self.result = f"{self.hari_str} {self.pasaran_str}, {self.tgl:02d} {miladi().bulan_miladi(self.bln)} {self.thn:04d}"
 
 
     def calculate(self):
