@@ -234,3 +234,89 @@ class miladi:
 
 #print(miladi().bulan_miladi(1))  # Output: Januari
 #print(miladi().bulan_miladi("Januari"))  # Output
+
+import math
+from petahilal import *  # Pastikan modul ini ada dan berfungsi dengan baik
+
+class CalDat:
+
+    def __init__(self, jd, timezone=0.0, pilihan=None):
+        self.jd = jd
+        self.timezone = timezone
+        self.pilihan = pilihan
+        self.hari_str, self.pasaran_str, self.tgl, self.bln, self.thn, self.jam = self.calculate()
+
+        # Memastikan pilihan tidak None dan mengubahnya menjadi uppercase
+        pilihan = self.pilihan.upper() if self.pilihan else None
+        
+        # Mengatur hasil berdasarkan pilihan
+        if pilihan == "HARI":
+            self.final_result = self.hari_str
+        elif pilihan == "PASARAN":
+            self.final_result = self.pasaran_str
+        elif pilihan == "HARPAS":
+            self.final_result = f"{self.hari_str} {self.pasaran_str}"
+        elif pilihan == "TANGGAL":
+            self.final_result = f"{tgl:02d} {fungsi.miladi().bulan_miladi(self.bln)} {self.thn:04d}"
+        elif pilihan == "JAM":
+            self.final_result = fungsi.konversi(self.jam, "JAM").result()
+        elif pilihan == "JDJAM":
+            self.final_result = self.jam
+        elif pilihan == "JDTANGGAL":
+            self.final_result = self.tgl
+        elif pilihan == "JDBULAN":
+            self.final_result = self.bln
+        elif pilihan == "JDTAHUN":
+            self.final_result = self.thn
+        elif pilihan == "JD_LENGKAP":
+            self.final_result = f"{self.tgl}\t{self.bln}\t{self.thn}\t{self.hari_str}\t{self.pasaran_str}"
+        elif pilihan == "JD_HP":
+            self.final_result = f"{self.hari_str}\t{self.pasaran_str}"
+        elif pilihan == "PHASES":
+            a = fungsi.konversi(self.jam, "JAM").result()
+            self.final_result = f"{self.tgl:02d} {fungsi.miladi().bulan_miladi(self.bln)} {self.thn:04d} Jam {a}"
+        else:
+            self.final_result = f"{self.hari_str} {self.pasaran_str}, {self.tgl:02d} {fungsi.miladi().bulan_miladi(self.bln)} {self.thn:04d}"
+
+
+    def calculate(self):
+        z = int(self.jd + 0.5)
+        
+        if z < 2299161:
+            a = z
+        else:
+            alpha = int((z - 1867216.25) / 36524.25)
+            a = z + 1 + alpha - int(alpha / 4)
+
+        jam = ((self.jd + 0.5 + self.timezone / 24) - z) * 24
+        if jam > 24:
+            jam -= 24
+            a += 1
+            z += 1
+
+        b = a + 1524
+        c = int((b - 122.1) / 365.25)
+        d = int(365.25 * c)
+        e = int((b - d) / 30.6001)
+
+        tgl = int(b - d - int(30.6001 * e))
+
+        if e < 14:
+            bln = e - 1
+        elif e == 14 or e == 15:
+            bln = e - 13
+
+        if bln > 2:
+            thn = c - 4716
+        else:
+            thn = c - 4715
+
+        hari = math.fmod(int(z) + 2, 7)
+        hari_nama = ["Sabtu", "Ahad", "Senin", "Selasa", "Rabu", "Kamis", "Jumu'ah"]
+        hari_str = hari_nama[int(hari)]
+
+        pasaran = math.fmod(int(z) + 1, 5)
+        pasaran_nama = ["Kliwon", "Legi", "Pahing", "Pon", "Wage"]
+        pasaran_str = pasaran_nama[int(pasaran)]
+
+        return hari_str, pasaran_str, tgl, bln, thn, jam
