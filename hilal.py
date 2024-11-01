@@ -1,3 +1,11 @@
+from skyfield import api
+from skyfield import almanac
+from datetime import timedelta
+from pytz import timezone
+
+ts = api.load.timescale()
+e = api.load('de440s.bsp')  # Menggunakan ephemeris DE440s
+
 class awalbulan:
     def __init__(self, bulan, tahun, TZ='Asia/Jakarta'):
         self.bulan = bulan
