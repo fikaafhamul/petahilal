@@ -2,7 +2,7 @@ from skyfield import api
 from skyfield import almanac
 from datetime import timedelta
 from pytz import timezone
-import fungsi
+from . import fungsi
 
 ts = api.load.timescale()
 e = api.load('de440s.bsp')  # Menggunakan ephemeris DE440s
