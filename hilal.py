@@ -11,9 +11,14 @@ class awalbulan:
     def __init__(self, bulan, tahun, TZ='Asia/Jakarta'):
         self.bulan = bulan
         self.tahun = tahun
+        self.lat = lat  # Latitude pengamat
+        self.lon = lon  # Longitude pengamat
         self.TZ = TZ
         self.JDE = self.hitung_jde()  # Menghitung JDE saat inisialisasi
         self.konjungsi = self.new_moon()  # Mengambil nilai konjungsi saat inisialisasi
+        self.sunset = self.calculate_hilal()
+        self.elongasi = None  # Untuk menyimpan nilai elongasi
+        self.tinggi_hilal = None  # Untuk menyimpan nilai tinggi hilal
     def hitung_jde(self):
         # Menghitung Hy
         Hy = self.tahun + (((self.bulan - 1) * 29.53) / 354.3671)
@@ -61,3 +66,28 @@ class awalbulan:
 #a = awal_bulan.konjungsi[0]
 #print(a.year)
 #print(f"Waktu Konjungsi Bulan adalah: {a.strftime('%Y-%m-%d %H:%M:%S.%f %Z')}")
+
+def calculate_hilal(self):
+        # Ambil waktu konjungsi pertama
+        konjungsi_time = self.konjungsi[0]
+
+        # Menentukan rentang waktu untuk pencarian matahari terbenam
+        t0 = ts.utc(konjungsi_time.year, konjungsi_time.month, konjungsi_time.day, 0, 0)
+        t1 = t0 + timedelta(days=1)
+
+        # Mengambil Lintang dan Bujur Pengamat
+        longlat = api.Topos(latitude = self.lat, longitude = self.lon)
+
+        # Menghitung waktu terbenam matahari
+        sunriset, sunBol = almanac.find_discrete(t0, t1, almanac.sunrise_sunset(e, longlat))
+        sunset_time = sunriset[sunBol == 0]  # 0 menandakan waktu terbenam
+
+        # Ubah ke waktu UTC
+        sunset_time_utc = sunset_time.utc_iso()
+        print("Waktu Terbenam Matahari (UTC):", sunset_time_utc)
+
+        # Ubah ke waktu lokal
+        ZonaWaktu = timezone(TZ)
+        sunset_time_local = sunset_time.astimezone(ZonaWaktu)
+        print("Waktu Terbenam Matahari (WIB):", sunset_time_local)
+        return sunset_time_local
