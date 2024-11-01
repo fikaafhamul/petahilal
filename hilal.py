@@ -8,7 +8,7 @@ ts = api.load.timescale()
 e = api.load('de440s.bsp')  # Menggunakan ephemeris DE440s
 
 class awalbulan:
-    def __init__(self, bulan, tahun, TZ='Asia/Jakarta'):
+    def __init__(self, bulan, tahun, lat, lon, TZ='Asia/Jakarta'):
         self.bulan = bulan
         self.tahun = tahun
         self.lat = lat  # Latitude pengamat
