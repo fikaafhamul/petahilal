@@ -319,3 +319,5 @@ class caldat:
         pasaran_str = pasaran_nama[int(pasaran)]
 
         return hari_str, pasaran_str, tgl, bln, thn, jam
+
+# print(fungsi.caldat(2451545).result)
