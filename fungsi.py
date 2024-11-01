@@ -268,7 +268,7 @@ class caldat:
         elif pilihan == "JDTAHUN":
             self.result = self.thn
         elif pilihan == "JD_LENGKAP":
-            self.result = {self.tgl}, {self.bln}, {self.thn}, {self.hari_str}, {self.pasaran_str}
+            self.result = self.tgl, self.bln, self.thn, self.hari_str, self.pasaran_str
         elif pilihan == "JD_HP":
             self.result = f"{self.hari_str}\t{self.pasaran_str}"
         elif pilihan == "PHASES":
