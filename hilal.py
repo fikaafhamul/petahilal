@@ -59,7 +59,7 @@ class awalbulan:
 
     def rise_set_moon(self):
         moon = e['moon']
-        longlat = api.topos(latitude=self.lat, longitude=self.lon)
+        longlat = api.Topos(latitude=self.lat, longitude=self.lon)
         topos_at = (e['earth'] + longlat).at
         def is_moon_up_at(t):
             t._nutation_angles = iau2000b(t.tt)
