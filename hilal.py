@@ -56,6 +56,15 @@ class awalbulan:
         ZonaWaktu = timezone(self.TZ)
         return new_moon_times.astimezone(ZonaWaktu)
 
+    def moonrise_moonset(ephemeris, topos):
+        moon = ephemeris['moon']
+        topos_at = (ephemeris['earth'] + topos).at
+        def is_moon_up_at(t):
+            t._nutation_angles = iau2000b(t.tt)
+            return topos_at(t).observe(moon).apparent().altaz()[0].degrees > -50/60
+        is_moon_up_at.rough_period = 0.5
+        return is_moon_up_at
+        
     def calculate_hilal(self):
         # Ambil waktu konjungsi pertama
         konjungsi_time = self.konjungsi[0]
@@ -77,4 +86,15 @@ class awalbulan:
         # Ubah ke waktu lokal
         ZonaWaktu = timezone(self.TZ)
         sunset_time_local = sunset_time.astimezone(ZonaWaktu)
-        return sunset_time_local
+
+        # Menghitung waktu terbenam Bulan
+        moonriset, moonBol = almanac.find_discrete(t0, t1, moonrise_moonset(e, longlat))
+        moonset_time = moonriset[moonBol == 0]
+
+        # Ubah ke waktu UTC
+        moonset_time_utc = moonset_time.utc_iso()
+
+        # Ubah ke waktu lokal
+        moonset_time_local = moonset_time.astimezone(ZonaWaktu)
+        
+        return moonset_time_local
