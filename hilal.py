@@ -73,10 +73,8 @@ class awalbulan:
 
         # Ubah ke waktu UTC
         sunset_time_utc = sunset_time.utc_iso()
-        print("Waktu Terbenam Matahari (UTC):", sunset_time_utc)
 
         # Ubah ke waktu lokal
         ZonaWaktu = timezone(self.TZ)
         sunset_time_local = sunset_time.astimezone(ZonaWaktu)
-        print("Waktu Terbenam Matahari (WIB):", sunset_time_local)
         return sunset_time_local
