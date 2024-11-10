@@ -16,6 +16,7 @@ class awalbulan:
         self.TZ = TZ
         self.JDE = self.hitung_jde()  # Menghitung JDE saat inisialisasi
         self.konjungsi = self.new_moon()  # Mengambil nilai konjungsi saat inisialisasi
+        self.moonrise_moonset = self.rise_set_moon()
         self.sunset, self.moonset = self.calculate_hilal()  # Simpan hasil ke atribut
         self.elongasi = None  # Untuk menyimpan nilai elongasi
         self.tinggi_hilal = None  # Untuk menyimpan nilai tinggi hilal
@@ -56,9 +57,10 @@ class awalbulan:
         ZonaWaktu = timezone(self.TZ)
         return new_moon_times.astimezone(ZonaWaktu)
 
-    def moonrise_moonset(ephemeris, topos):
-        moon = ephemeris['moon']
-        topos_at = (ephemeris['earth'] + topos).at
+    def rise_set_moon(self, e):
+        moon = e['moon']
+        longlat = api.topos(latitude=self.lat, longitude=self.lon)
+        topos_at = (e['earth'] + longlat).at
         def is_moon_up_at(t):
             t._nutation_angles = iau2000b(t.tt)
             return topos_at(t).observe(moon).apparent().altaz()[0].degrees > -50/60
@@ -88,7 +90,7 @@ class awalbulan:
         sunset_time_local = sunset_time.astimezone(ZonaWaktu)
 
         # Menghitung waktu terbenam Bulan
-        moonriset, moonBol = almanac.find_discrete(t0, t1, moonrise_moonset(e, longlat))
+        moonriset, moonBol = almanac.find_discrete(t0, t1, self.moonrise_moonset)
         moonset_time = moonriset[moonBol == 0]
 
         # Ubah ke waktu UTC
