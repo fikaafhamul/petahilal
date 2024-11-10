@@ -1,5 +1,6 @@
 from skyfield import api
 from skyfield import almanac
+from skyfield.nutationlib import iau2000b
 from datetime import timedelta
 from pytz import timezone
 from . import fungsi
