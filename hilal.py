@@ -16,7 +16,7 @@ class awalbulan:
         self.TZ = TZ
         self.JDE = self.hitung_jde()  # Menghitung JDE saat inisialisasi
         self.konjungsi = self.new_moon()  # Mengambil nilai konjungsi saat inisialisasi
-        self.sunset = self.calculate_hilal()  # Simpan hasil ke atribut
+        self.sunset, self.moonset = self.calculate_hilal()  # Simpan hasil ke atribut
         self.elongasi = None  # Untuk menyimpan nilai elongasi
         self.tinggi_hilal = None  # Untuk menyimpan nilai tinggi hilal
 
@@ -97,4 +97,4 @@ class awalbulan:
         # Ubah ke waktu lokal
         moonset_time_local = moonset_time.astimezone(ZonaWaktu)
         
-        return moonset_time_local
+        return sunset_time_local, moonset_time_local
