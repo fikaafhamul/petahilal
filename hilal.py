@@ -16,9 +16,10 @@ class awalbulan:
         self.TZ = TZ
         self.JDE = self.hitung_jde()  # Menghitung JDE saat inisialisasi
         self.konjungsi = self.new_moon()  # Mengambil nilai konjungsi saat inisialisasi
-        self.sunset = self.calculate_hilal()
+        self.sunset = self.calculate_hilal()  # Simpan hasil ke atribut
         self.elongasi = None  # Untuk menyimpan nilai elongasi
         self.tinggi_hilal = None  # Untuk menyimpan nilai tinggi hilal
+
     def hitung_jde(self):
         # Menghitung Hy
         Hy = self.tahun + (((self.bulan - 1) * 29.53) / 354.3671)
@@ -35,7 +36,6 @@ class awalbulan:
         return JDE
 
     def new_moon(self):
-
         temp = fungsi.caldat(self.JDE, 0, "JD_LENGKAP").result
         temp = list(temp)
 
@@ -56,18 +56,7 @@ class awalbulan:
         ZonaWaktu = timezone(self.TZ)
         return new_moon_times.astimezone(ZonaWaktu)
 
-
-
-#tahun = 1446
-#bulan = 5
-#awal_bulan = awalbulan(bulan, tahun)
-
-#print(f"Nilai JDE untuk Tahun {awal_bulan.tahun} dan Bulan {awal_bulan.bulan} adalah: {awal_bulan.JDE}")
-#a = awal_bulan.konjungsi[0]
-#print(a.year)
-#print(f"Waktu Konjungsi Bulan adalah: {a.strftime('%Y-%m-%d %H:%M:%S.%f %Z')}")
-
-def calculate_hilal(self):
+    def calculate_hilal(self):
         # Ambil waktu konjungsi pertama
         konjungsi_time = self.konjungsi[0]
 
@@ -75,19 +64,19 @@ def calculate_hilal(self):
         t0 = ts.utc(konjungsi_time.year, konjungsi_time.month, konjungsi_time.day, 0, 0)
         t1 = t0 + timedelta(days=1)
 
-        # Mengambil Lintang dan Bujur Pengamat
-        longlat = api.Topos(latitude = self.lat, longitude = self.lon)
+        # Menghitung Lintang dan Bujur Pengamat
+        longlat = api.Topos(latitude=self.lat, longitude=self.lon)
 
         # Menghitung waktu terbenam matahari
         sunriset, sunBol = almanac.find_discrete(t0, t1, almanac.sunrise_sunset(e, longlat))
         sunset_time = sunriset[sunBol == 0]  # 0 menandakan waktu terbenam
 
         # Ubah ke waktu UTC
-        sunset_time_utc = sunset_time.utc_iso()
+        sunset_time_utc = sunset_time.iso()  # Menggunakan iso() untuk format ISO
         print("Waktu Terbenam Matahari (UTC):", sunset_time_utc)
 
         # Ubah ke waktu lokal
-        ZonaWaktu = timezone(TZ)
+        ZonaWaktu = timezone(self.TZ)
         sunset_time_local = sunset_time.astimezone(ZonaWaktu)
         print("Waktu Terbenam Matahari (WIB):", sunset_time_local)
         return sunset_time_local
