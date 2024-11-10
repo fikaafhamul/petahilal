@@ -57,7 +57,7 @@ class awalbulan:
         ZonaWaktu = timezone(self.TZ)
         return new_moon_times.astimezone(ZonaWaktu)
 
-    def rise_set_moon(self, e):
+    def rise_set_moon(self):
         moon = e['moon']
         longlat = api.topos(latitude=self.lat, longitude=self.lon)
         topos_at = (e['earth'] + longlat).at
