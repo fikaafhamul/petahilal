@@ -72,7 +72,7 @@ class awalbulan:
         sunset_time = sunriset[sunBol == 0]  # 0 menandakan waktu terbenam
 
         # Ubah ke waktu UTC
-        sunset_time_utc = sunset_time.iso()  # Menggunakan iso() untuk format ISO
+         sunset_time_utc = sunset_time.utc_iso()
         print("Waktu Terbenam Matahari (UTC):", sunset_time_utc)
 
         # Ubah ke waktu lokal
