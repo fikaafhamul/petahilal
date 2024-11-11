@@ -91,7 +91,10 @@ class awalbulan:
         sunset_time_local = sunset_time.astimezone(ZonaWaktu)
 
         # Menghitung Umur Bulan
-        moonage = (sunset_time_local - konjungsi_time)
+        temp = konjungsi_time.hour + (konjungsi_time.minute)/60 + (konjungsi_time.second)/3600
+        temp1 = sunset_time_local[0]
+        temp1 = temp1.hour + (temp1.minute)/60 + (temp1.second)/3600
+        moonage = (temp1 - temp)
 
         # Menghitung waktu terbenam Bulan
         moonriset, moonBol = almanac.find_discrete(t0, t1, self.moonrise_moonset)
