@@ -18,7 +18,7 @@ class awalbulan:
         self.JDE = self.hitung_jde()  # Menghitung JDE saat inisialisasi
         self.konjungsi = self.new_moon()  # Mengambil nilai konjungsi saat inisialisasi
         self.moonrise_moonset = self.rise_set_moon()
-        self.sunset, self.moonset = self.calculate_hilal()  # Simpan hasil ke atribut
+        self.sunset, self.moonset, self.moonage = self.calculate_hilal()  # Simpan hasil ke atribut
         self.elongasi = None  # Untuk menyimpan nilai elongasi
         self.tinggi_hilal = None  # Untuk menyimpan nilai tinggi hilal
 
@@ -90,6 +90,9 @@ class awalbulan:
         ZonaWaktu = timezone(self.TZ)
         sunset_time_local = sunset_time.astimezone(ZonaWaktu)
 
+        # Menghitung Umur Bulan
+        moonage = (sunset_time_local - konjungsi_time)
+
         # Menghitung waktu terbenam Bulan
         moonriset, moonBol = almanac.find_discrete(t0, t1, self.moonrise_moonset)
         moonset_time = moonriset[moonBol == 0]
@@ -100,4 +103,4 @@ class awalbulan:
         # Ubah ke waktu lokal
         moonset_time_local = moonset_time.astimezone(ZonaWaktu)
         
-        return sunset_time_local, moonset_time_local
+        return sunset_time_local, moonset_time_local, moonage
