@@ -114,13 +114,13 @@ class awalbulan:
         geo_moon = location.at(sunset_time[0]).observe(moon).apparent()
         geo_sun = location.at(sunset_time[0]).observe(sun).apparent()
         alt_geo, az, distance = geo_moon.altaz()
-        el_geo = geo_moon.separation(geo_sun)
+        el_geo = geo_sun.separation_from(geo_moon)
 
         # Menghitung Tinggi dan Elongasi Toposentris Bulan
         observer = earth + longlat
         topo_moon = observer.at(sunset_time[0]).observe(moon).apparent()
         topo_sun = observer.at(sunset_time[0]).observe(sun).apparent()
         alt_topo, az, distance = topo_moon.altaz()
-        el_topo = topo_moon.separation(topo_sun)
+        el_topo = topo_sun.separation_from(topo_moon)
         
         return sunset_time_local, moonset_time_local, moonage, alt_geo, el_geo, alt_topo, el_topo
