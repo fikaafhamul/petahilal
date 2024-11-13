@@ -9,20 +9,25 @@ ts = api.load.timescale()
 e = api.load('de440s.bsp')  # Menggunakan ephemeris DE440s
 
 class awalbulan:
-    def __init__(self, bulan, tahun, lat, lon, TZ='Asia/Jakarta'):
+    def __init__(self, bulan, tahun, lat, lon, TZ='Asia/Jakarta', TH = 0, kriteria = 'NEO MABIMS'):
         self.bulan = bulan
         self.tahun = tahun
+        if self.bulan < 2:
+            bulan1 = bulan - 1 + 12
+            tahun1 = tahun - 1
+        else:
+            bulan1 = bulan - 1
         self.lat = lat  # Latitude pengamat
         self.lon = lon  # Longitude pengamat
         self.TZ = TZ
         self.JDE = self.hitung_jde()  # Menghitung JDE saat inisialisasi
         self.konjungsi = self.new_moon()  # Mengambil nilai konjungsi saat inisialisasi
         self.moonrise_moonset = self.rise_set_moon()
-        self.sunset, self.moonset, self.moonage = self.calculate_hilal()  # Simpan hasil ke atribut
+        self.sunset, self.moonset, self.moonage, self.juliandatum = self.calculate_hilal()  # Simpan hasil ke atribut
 
     def hitung_jde(self):
         # Menghitung Hy
-        Hy = self.tahun + (((self.bulan - 1) * 29.53) / 354.3671)
+        Hy = self.tahun1 + (((self.bulan1 - 1) * 29.53) / 354.3671)
 
         # Menghitung K
         K = round(((Hy - 1410) * 12), 0) - 129
@@ -119,5 +124,18 @@ class awalbulan:
         topo_sun = observer.at(sunset_time[0]).observe(sun).apparent()
         alt, az, distance = topo_moon.altaz()
         el_topo = topo_sun.separation_from(topo_moon)
+
+        kriteria = kriteria.upper()
+        if kriteria == "IRNU":
+            jd = (t0 + timedelta(days=1)) if (alt >= 3 and el_geo >= 6.4) or (el_geo > 9.9) else (t0 + timedelta(days=2))
+        elif kriteria == "MUHAMADIYYAH":
+            jd = (t0 + timedelta(days=1)) if (alt >= 0) else (t0 + timedelta(days=2))
+        elif kriteria == "MABIMS LAMA":
+            jd = (t0 + timedelta(days=1)) if (alt >= 2 and el_geo >= 3 and moonage >= 8) else (t0 + timedelta(days=2))
+        elif kriteria == "NEO MABIMS":
+            jd = (t0 + timedelta(days=1)) if (alt >= 3 and el_geo >= 6.4) else (t0 + timedelta(days=2))
+
+        jd = jd + timedelta(days=28)
+        print(jd.astimezone(ZonaWaktu))
         
-        return sunset_time_local, moonset_time_local, moonage
+        return sunset_time_local, moonset_time_local, moonage, jd
