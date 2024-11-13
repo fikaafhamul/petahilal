@@ -121,12 +121,13 @@ class awalbulan:
         # Menghitung Tinggi dan Elongasi Bulan
         geo_moon = earth.at(sunset_time[0]).observe(moon).apparent()
         geo_sun = earth.at(sunset_time[0]).observe(sun).apparent()
-        el_geo = geo_sun.separation_from(geo_moon)
+        el_geo = geo_sun.separation_from(geo_moon).degrees
 
         topo_moon = observer.at(sunset_time[0]).observe(moon).apparent()
         topo_sun = observer.at(sunset_time[0]).observe(sun).apparent()
         alt, az, distance = topo_moon.altaz()
-        el_topo = topo_sun.separation_from(topo_moon)
+        alt = alt.degrees
+        el_topo = topo_sun.separation_from(topo_moon).degrees
 
         kriteria = self.kriteria.upper()
         if kriteria == "IRNU":
