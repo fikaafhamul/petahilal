@@ -21,6 +21,8 @@ class awalbulan:
         self.lat = lat  # Latitude pengamat
         self.lon = lon  # Longitude pengamat
         self.TZ = TZ
+        self.TH = TH
+        self.kriteria = kriteria
         self.JDE = self.hitung_jde()  # Menghitung JDE saat inisialisasi
         self.konjungsi = self.new_moon()  # Mengambil nilai konjungsi saat inisialisasi
         self.moonrise_moonset = self.rise_set_moon()
