@@ -18,7 +18,7 @@ class awalbulan:
         self.JDE = self.hitung_jde()  # Menghitung JDE saat inisialisasi
         self.konjungsi = self.new_moon()  # Mengambil nilai konjungsi saat inisialisasi
         self.moonrise_moonset = self.rise_set_moon()
-        self.sunset, self.moonset, self.moonage, self.tinggi_geo, self.elongasi_geo, self.tinggi_topo, self.elongasi_topo = self.calculate_hilal()  # Simpan hasil ke atribut
+        self.sunset, self.moonset, self.moonage = self.calculate_hilal()  # Simpan hasil ke atribut
 
     def hitung_jde(self):
         # Menghitung Hy
@@ -114,13 +114,17 @@ class awalbulan:
         geo_moon = location.at(sunset_time[0]).observe(moon).apparent()
         geo_sun = location.at(sunset_time[0]).observe(sun).apparent()
         alt_geo, az, distance = geo_moon.altaz()
+        print(f'Tinggi bulan (dari pusat Bumi): {alt_geo}')
         el_geo = geo_sun.separation_from(geo_moon)
+        print(f'Elongasi bulan (dari pusat Bumi): {el_geo}')
 
         # Menghitung Tinggi dan Elongasi Toposentris Bulan
         observer = earth + longlat
         topo_moon = observer.at(sunset_time[0]).observe(moon).apparent()
         topo_sun = observer.at(sunset_time[0]).observe(sun).apparent()
         alt_topo, az, distance = topo_moon.altaz()
+        print(f'Tinggi bulan (dari pengamat): {alt_topo}')
         el_topo = topo_sun.separation_from(topo_moon)
+        print(f'Elongasi bulan (dari pengamat): {alt_topo}')
         
-        return sunset_time_local, moonset_time_local, moonage, alt_geo, el_geo, alt_topo, el_topo
+        return sunset_time_local, moonset_time_local, moonage
