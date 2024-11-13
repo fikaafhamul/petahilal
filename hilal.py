@@ -110,7 +110,7 @@ class awalbulan:
         sun = e['sun']
 
         # Menghitung Tinggi dan Elongasi Geosentris Bulan
-        location = earth + Topos(latitude_degrees=0, longitude_degrees=0)
+        location = earth + api.Topos(latitude_degrees=0, longitude_degrees=0)
         geo_moon = location.at(sunset_time[0]).observe(moon).apparent()
         geo_sun = location.at(sunset_time[0]).observe(sun).apparent()
         alt_geo, az, distance = geo_moon.altaz()
