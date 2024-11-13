@@ -108,23 +108,23 @@ class awalbulan:
         earth = e['earth']
         moon = e['moon']
         sun = e['sun']
+        observer = earth + longlat
 
         # Menghitung Tinggi dan Elongasi Geosentris Bulan
-        location = earth + api.Topos(latitude_degrees=0, longitude_degrees=0)
         geo_moon = location.at(sunset_time[0]).observe(moon).apparent()
         geo_sun = location.at(sunset_time[0]).observe(sun).apparent()
-        alt_geo, az, distance = geo_moon.altaz()
+        alt, az, distance = geo_moon.altaz()
+        
         print(f'Tinggi bulan (dari pusat Bumi): {alt_geo}')
         el_geo = geo_sun.separation_from(geo_moon)
         print(f'Elongasi bulan (dari pusat Bumi): {el_geo}')
 
         # Menghitung Tinggi dan Elongasi Toposentris Bulan
-        observer = earth + longlat
         topo_moon = observer.at(sunset_time[0]).observe(moon).apparent()
         topo_sun = observer.at(sunset_time[0]).observe(sun).apparent()
-        alt_topo, az, distance = topo_moon.altaz()
+        alt, az, distance = topo_moon.altaz()
         print(f'Tinggi bulan (dari pengamat): {alt_topo}')
         el_topo = topo_sun.separation_from(topo_moon)
-        print(f'Elongasi bulan (dari pengamat): {alt_topo}')
+        print(f'Elongasi bulan (dari pengamat): {el_topo}')
         
         return sunset_time_local, moonset_time_local, moonage
