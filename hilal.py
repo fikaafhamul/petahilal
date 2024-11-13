@@ -13,11 +13,11 @@ class awalbulan:
         self.bulan = bulan
         self.tahun = tahun
         if self.bulan < 2:
-            bulan1 = bulan - 1 + 12
-            tahun1 = tahun - 1
+            self.bulan1 = bulan - 1 + 12
+            self.tahun1 = tahun - 1
         else:
-            bulan1 = bulan - 1
-            tahun1 = tahun
+            self.bulan1 = bulan - 1
+            self.tahun1 = tahun
         self.lat = lat  # Latitude pengamat
         self.lon = lon  # Longitude pengamat
         self.TZ = TZ
