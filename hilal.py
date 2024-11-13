@@ -128,7 +128,7 @@ class awalbulan:
         alt, az, distance = topo_moon.altaz()
         el_topo = topo_sun.separation_from(topo_moon)
 
-        kriteria = kriteria.upper()
+        kriteria = self.kriteria.upper()
         if kriteria == "IRNU":
             jd = (t0 + timedelta(days=1)) if (alt >= 3 and el_geo >= 6.4) or (el_geo > 9.9) else (t0 + timedelta(days=2))
         elif kriteria == "MUHAMADIYYAH":
