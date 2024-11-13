@@ -9,7 +9,7 @@ ts = api.load.timescale()
 e = api.load('de440s.bsp')  # Menggunakan ephemeris DE440s
 
 class awalbulan:
-    def __init__(self, bulan, tahun, lat, lon, TZ='Asia/Jakarta', TH = 0, kriteria = 'NEO MABIMS'):
+    def __init__(self, bulan, tahun, lat, lon, TZ='Asia/Jakarta', TT = 0, TH = 0, kriteria = 'NEO MABIMS'):
         self.bulan = bulan
         self.tahun = tahun
         if self.bulan < 2:
@@ -21,6 +21,7 @@ class awalbulan:
         self.lat = lat  # Latitude pengamat
         self.lon = lon  # Longitude pengamat
         self.TZ = TZ
+        self.TT = TT
         self.TH = TH
         self.kriteria = kriteria
         self.JDE = self.hitung_jde()  # Menghitung JDE saat inisialisasi
@@ -83,7 +84,7 @@ class awalbulan:
         t1 = t0 + timedelta(days=1)
 
         # Menghitung Lintang dan Bujur Pengamat
-        longlat = api.Topos(latitude=self.lat, longitude=self.lon)
+        longlat = api.Topos(latitude=self.lat, longitude=self.lon, elevation=self.TT)
 
         # Menghitung waktu terbenam matahari
         sunriset, sunBol = almanac.find_discrete(t0, t1, almanac.sunrise_sunset(e, longlat))
@@ -189,5 +190,7 @@ class awalbulan:
         alt, az, distance = topo_moon.altaz()
         alt = alt.degrees
         el_topo = topo_sun.separation_from(topo_moon).degrees
+
+        
         
         return konjungsi_times, jd, sunset_time_local, moonset_time_local, moonage
