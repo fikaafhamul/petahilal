@@ -84,7 +84,7 @@ class awalbulan:
         t1 = t0 + timedelta(days=1)
 
         # Menghitung Lintang dan Bujur Pengamat
-        longlat = api.Topos(latitude=self.lat, longitude=self.lon, elevation=self.TT)
+        longlat = api.Topos(latitude=self.lat, longitude=self.lon, elevation_m=self.TT)
 
         # Menghitung waktu terbenam matahari
         sunriset, sunBol = almanac.find_discrete(t0, t1, almanac.sunrise_sunset(e, longlat))
