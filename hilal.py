@@ -18,7 +18,7 @@ class awalbulan:
         else:
             self.bulan1 = bulan - 1
             self.tahun1 = tahun
-	self.lokasi = lok # Nama Lokasi
+        self.lokasi = lok  # Nama Lokasi
         self.lat = lat  # Latitude pengamat
         self.lon = lon  # Longitude pengamat
         self.TZ = TZ
