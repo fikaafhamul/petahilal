@@ -46,17 +46,17 @@ class awalbulan:
         return JDE
 
     def cetak(self, sun_set, konjungsi, moon_set):
-	bln_h = fungsi.hijriah.bulan_hijriah(self.bulan)
-	thn_h = self.tahun
-	sun_set = sun_set[0]
-	moon_set = moon_set[0]
-	n_bln = fungsi.miladi.bulan_miladi(sun_set.month)
-	latitude = fungsi.konversi(self.lat, "LINTANG")
-	longitude = fungsi.konversi(self.lon, "BUJUR")
-	konjungsi = konjungsi[0]
-	temp = sun_set[0].tzinfo.utcoffset(A[0])
-	delta_time_tz = int(a.total_seconds()/3600)
-	n1_bln = fungsi.miladi.bulan_miladi(konjungsi.month)
+        bln_h = fungsi.hijriah.bulan_hijriah(self.bulan)
+        thn_h = self.tahun
+        sun_set = sun_set[0]
+        moon_set = moon_set[0]
+        n_bln = fungsi.miladi.bulan_miladi(sun_set.month)
+        latitude = fungsi.konversi(self.lat, "LINTANG")
+        longitude = fungsi.konversi(self.lon, "BUJUR")
+        konjungsi = konjungsi[0]
+        temp = sun_set[0].tzinfo.utcoffset(A[0])
+        delta_time_tz = int(a.total_seconds()/3600)
+        n1_bln = fungsi.miladi.bulan_miladi(konjungsi.month)
 	    
         print ('\n')
 	print (f"                 Data Astronomi {bln_h} {thn_h} H")
