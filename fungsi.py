@@ -321,3 +321,18 @@ class caldat:
         return hari_str, pasaran_str, tgl, bln, thn, jam
 
 # print(fungsi.caldat(2451545).result)
+
+def tangkap_print(func, *args, **kwargs):
+    # Membuat objek StringIO untuk menangkap output
+    output = io.StringIO()
+    # Menyimpan referensi asli dari sys.stdout
+    original_stdout = sys.stdout
+    # Mengalihkan stdout ke objek StringIO
+    sys.stdout = output
+    try:
+        func(*args, **kwargs)  # Memanggil fungsi yang diinginkan
+    finally:
+        # Mengembalikan stdout ke referensi aslinya
+        sys.stdout = original_stdout
+    # Mengambil hasil output sebagai string
+    return output.getvalue()
