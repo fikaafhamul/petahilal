@@ -225,5 +225,6 @@ class awalbulan:
         alt = alt.degrees
         el_topo = topo_sun.separation_from(topo_moon).degrees
 
-	hasil = fungsi.tangkap_print(cetak(sunset_time_local, konjungsi_times, moonset_time_local))
+        hasil = fungsi.tangkap_print(cetak(sunset_time_local, konjungsi_times, moonset_time_local))
+	    
         return konjungsi_times, jd, sunset_time_local, moonset_time_local, alt, el_topo, moonage, hasil
