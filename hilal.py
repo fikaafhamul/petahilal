@@ -49,11 +49,12 @@ class awalbulan:
 	bln_h = fungsi.hijriah.bulan_hijriah(self.bulan)
 	thn_h = self.tahun
 	sun_set = sun_set
+	n_bln = fungsi.miladi.bulan_miladi(sun_set.month)
         print ('\n')
 	print (f"                 Data Astronomi {bln_h} {thn_h} H")
 	print (f"              Jet Propulsion Laboratory (JPL) Ephemeris, by Fika Afhamul Fuscha")
 	print ('\n')
-	print ("- Perhitungan telah dilakukan untuk menentukan waktu Matahari terbenam pada")
+	print ('- Perhitungan telah dilakukan untuk menentukan waktu matahari terbenam pada %02d:%02d:%02d di tanggal %d %d %d' % (sun_set.hour,sun_set.minute,sun_set.second,sun_set.day,n_bln,sun_set.year))
 	print ('- All data are in local observer time')
 	print ('- Atmosphere refraction: Temperature: %d °C  Pressure: %d mb' % (temperature_C, pressure_mbar))
 	if loc_name is None:
