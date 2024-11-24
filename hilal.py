@@ -9,7 +9,7 @@ ts = api.load.timescale()
 e = api.load('de440s.bsp')  # Menggunakan ephemeris DE440s
 
 class awalbulan:
-    def __init__(self, bulan, tahun, lat, lon, TZ='Asia/Jakarta', TT = 0, TH = 0, kriteria = 'NEO MABIMS'):
+    def __init__(self, bulan, tahun, lok, lat, lon, TZ='Asia/Jakarta', TT = 0, TH = 0, kriteria = 'NEO MABIMS'):
         self.bulan = bulan
         self.tahun = tahun
         if self.bulan < 2:
@@ -18,6 +18,7 @@ class awalbulan:
         else:
             self.bulan1 = bulan - 1
             self.tahun1 = tahun
+	self.lokasi = lok # Nama Lokasi
         self.lat = lat  # Latitude pengamat
         self.lon = lon  # Longitude pengamat
         self.TZ = TZ
@@ -45,12 +46,14 @@ class awalbulan:
         return JDE
 
     def cetak(self):
+	bln_h = fungsi.hijriah.bulan_hijriah(self.bulan)
+	thn_h = self.tahun
+	sun_set
         print ('\n')
-	print ("                 Accurate Hijri Calculator (AHC)")
-	print ('                  Crescent data for %s %d' % (hijri_months_string[int(hijri_month)-1],hijri_year))
+	print (f"                 Data Astronomi {bln_h} {thn_h} H")
+	print (f"              Jet Propulsion Laboratory (JPL) Ephemeris, by Fika Afhamul Fuscha")
 	print ('\n')
-	#print ('- Calculations are done for sunset time at %02d:%02d:%02d on %d-%d-%d' % (sunset_local.hour,sunset_local.minute,sunset_local.second,calc_ijtima_local.day,calc_ijtima_local.month,calc_ijtima_local.year))
-	print ('- Calculations are done for sunset time at %02d:%02d:%02d on %d-%d-%d' % (sunset_local.hour,sunset_local.minute,sunset_local.second,sunset_local.day,sunset_local.month,sunset_local.year))
+	print ("- Perhitungan telah dilakukan untuk menentukan waktu Matahari terbenam pada")
 	print ('- All data are in local observer time')
 	print ('- Atmosphere refraction: Temperature: %d °C  Pressure: %d mb' % (temperature_C, pressure_mbar))
 	if loc_name is None:
