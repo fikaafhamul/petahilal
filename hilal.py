@@ -55,7 +55,7 @@ class awalbulan:
         latitude = fungsi.konversi(self.lat, "LINTANG")
         longitude = fungsi.konversi(self.lon, "BUJUR")
         konjungsi = self.konjungsi
-        temp = sun_set[0].tzinfo.utcoffset(A[0])
+        temp = sun_set.tzinfo.utcoffset(A[0])
         delta_time_tz = int(a.total_seconds()/3600)
         n1_bln = fungsi.miladi().bulan_miladi(konjungsi.month)
 	    
