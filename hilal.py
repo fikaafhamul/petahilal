@@ -45,10 +45,10 @@ class awalbulan:
 
         return JDE
 
-    def cetak(self):
+    def cetak(self, sun_set):
 	bln_h = fungsi.hijriah.bulan_hijriah(self.bulan)
 	thn_h = self.tahun
-	sun_set
+	sun_set = sun_set
         print ('\n')
 	print (f"                 Data Astronomi {bln_h} {thn_h} H")
 	print (f"              Jet Propulsion Laboratory (JPL) Ephemeris, by Fika Afhamul Fuscha")
