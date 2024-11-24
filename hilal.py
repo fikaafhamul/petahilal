@@ -76,13 +76,7 @@ class awalbulan:
 	print ('=====================================================================================\n')
 	print ('- Waktu Konjungsi: %d %d %d M %02d:%02d:%02d LT' % (konjungsi.day,n1_bln,konjungsi.year,konjungsi.hour,konjungsi.minute,konjungsi.second))
 	print ('- Waktu Matahari Terbenam: %02d:%02d:%02d                       - Waktu Bulan Terbenam: %02d:%02d:%02d' % (sun_set.hour,sun_set.minute,sun_set.second, moon_set.hour,moon_set.minute,moon_set.second))
-	print ('- Sun altitude: '+print_angle(sun_alt)+'              - Moon age: '+print_timedelta(moon_age))
-	print ('- Sun azimuth: '+print_angle(sun_az)+'              - Moon lag time: '+print_timedelta(moon_lag_time))
-	print ('- Crescent width: '+print_angle(width)+'             - Moon altitude: '+print_angle(moon_alt))
-	print ('- Moon illumination: %.2f' % illumination+' %              - Moon azimuth: '+print_angle(moon_az))
-	print ('- Moon distance: %.2f' % moon_dist+' km            - Moon elongation (topocentric): '+print_angle(moon_elong))
-	print ('- Moon semi-diameter: '+print_angle(SD)+'         - Moon elongation (geocentric): '+print_angle(moon_elong_geo))
-	print ('- Moon horizontal parallax: '+print_angle(parallax))
+
 
     def new_moon(self):
         temp = fungsi.caldat(self.JDE, 0, "JD_LENGKAP").result
