@@ -45,7 +45,33 @@ class awalbulan:
         return JDE
 
     def cetak(self):
-        
+        print ('\n')
+	    print ("                 Accurate Hijri Calculator (AHC)")
+	    print ('                  Crescent data for %s %d' % (hijri_months_string[int(hijri_month)-1],hijri_year))
+	    print ('\n')
+	    #print ('- Calculations are done for sunset time at %02d:%02d:%02d on %d-%d-%d' % (sunset_local.hour,sunset_local.minute,sunset_local.second,calc_ijtima_local.day,calc_ijtima_local.month,calc_ijtima_local.year))
+	    print ('- Calculations are done for sunset time at %02d:%02d:%02d on %d-%d-%d' % (sunset_local.hour,sunset_local.minute,sunset_local.second,sunset_local.day,sunset_local.month,sunset_local.year))
+	    print ('- All data are in local observer time')
+	    print ('- Atmosphere refraction: Temperature: %d °C  Pressure: %d mb' % (temperature_C, pressure_mbar))
+	    if loc_name is None:
+		    print ('Location: ')
+	    else:
+		    print ('- Location: '+loc_name)
+	    print ('   - Long: '+print_angle(longitude)+'  Lat: '+print_angle(latitude)+'  Elev: %.2f m' % elevation)
+	    if delta_time_tz<0:
+		    print ('   - Time zone: '+time_zone_str+' '+print_timedelta_tz(delta_time_tz))
+	    else:
+		    print ('   - Time zone: '+time_zone_str+' +'+print_timedelta_tz(delta_time_tz))
+	    print ('=====================================================================================\n')
+	    print ('- Conjuction time: %d-%d-%d %02d:%02d:%02d LT or %d-%d-%d %02d:%02d:%02d UTC' % (ijtima_local.day,ijtima_local.month,ijtima_local.year,ijtima_local.hour,ijtima_local.minute,ijtima_local.second,ijtima_utc.day,ijtima_utc.month,ijtima_utc.year,ijtima_utc.hour,ijtima_utc.minute,ijtima_utc.second))
+	    print ('- Sunset: %02d:%02d:%02d                       - Moonset: %02d:%02d:%02d' % (sunset_local.hour,sunset_local.minute,sunset_local.second, moonset_local.hour,moonset_local.minute,moonset_local.second))
+	    print ('- Sun altitude: '+print_angle(sun_alt)+'              - Moon age: '+print_timedelta(moon_age))
+	    print ('- Sun azimuth: '+print_angle(sun_az)+'              - Moon lag time: '+print_timedelta(moon_lag_time))
+	    print ('- Crescent width: '+print_angle(width)+'             - Moon altitude: '+print_angle(moon_alt))
+	    print ('- Moon illumination: %.2f' % illumination+' %              - Moon azimuth: '+print_angle(moon_az))
+	    print ('- Moon distance: %.2f' % moon_dist+' km            - Moon elongation (topocentric): '+print_angle(moon_elong))
+	    print ('- Moon semi-diameter: '+print_angle(SD)+'         - Moon elongation (geocentric): '+print_angle(moon_elong_geo))
+	    print ('- Moon horizontal parallax: '+print_angle(parallax))
 
     def new_moon(self):
         temp = fungsi.caldat(self.JDE, 0, "JD_LENGKAP").result
