@@ -10,6 +10,10 @@ class konversi:
             self.result = self.deg2dms1()
         elif pilihan == "JAM1":
             self.result = self.deg2hms1()
+        elif pilihan == "LINTANG":
+            self.result = self.deg2dms2()
+        elif pilihan == "BUJUR":
+            self.result = self.deg2dms3()
         else:
             self.result = self.deg2dms()
 
@@ -30,7 +34,7 @@ class konversi:
             return f"-{D}° {M:02}' {S:05.2f}\""
         else:
             return f"{D}° {M:02}' {S:05.2f}\""
-
+    
     def deg2hms(self):
         D = int(abs(self.angle))
         M = int((abs(self.angle) - D) * 60)
@@ -104,6 +108,41 @@ class konversi:
                 return f"{M:02} Menit {S:05.2f} Detik"
             else:
                 return f"{D} jam {M:02} Menit {S:05.2f} Detik"
+    def deg2dms2(self):
+        D = int(abs(self.angle))
+        M = int((abs(self.angle) - D) * 60)
+        S = (abs(self.angle) - D - M / 60) * 3600
+
+        # Check for rounding issues
+        if S >= 60:
+            S = 0
+            M += 1
+        if M >= 60:
+            M = 0
+            D += 1
+
+        if self.angle < 0:
+            return f"{D}° {M:02}' {S:05.2f}\" LS"
+        else:
+            return f"{D}° {M:02}' {S:05.2f}\" LU"
+            
+    def deg2dms3(self):
+        D = int(abs(self.angle))
+        M = int((abs(self.angle) - D) * 60)
+        S = (abs(self.angle) - D - M / 60) * 3600
+
+        # Check for rounding issues
+        if S >= 60:
+            S = 0
+            M += 1
+        if M >= 60:
+            M = 0
+            D += 1
+
+        if self.angle < 0:
+            return f"{D}° {M:02}' {S:05.2f}\" BB"
+        else:
+            return f"{D}° {M:02}' {S:05.2f}\" BT"        
 
 #print(konversi(287.856956).result)
 
