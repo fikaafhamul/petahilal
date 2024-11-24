@@ -59,23 +59,23 @@ class awalbulan:
         n1_bln = fungsi.miladi.bulan_miladi(konjungsi.month)
 	    
         print ('\n')
-	print (f"                 Data Astronomi {bln_h} {thn_h} H")
-	print (f"              Jet Propulsion Laboratory (JPL) Ephemeris, by Fika Afhamul Fuscha")
-	print ('\n')
-	print ('- Perhitungan telah dilakukan untuk menentukan waktu matahari terbenam pada %02d:%02d:%02d di tanggal %d %d %d M' % (sun_set.hour,sun_set.minute,sun_set.second,sun_set.day,n_bln,sun_set.year))
-	print ('- Semua data disajikan dalam waktu lokal pengamat')
-	if self.lokasi is None:
-		print ('Lokasi: ')
-	else:
-		print ('- Lokasi: ' + self.lokasi)
-	print ('   - Lintang: ' + (latitude) + '  Bujur: ' + (longitude) + '  Elevasi: %.2f m' % self.TT)
-	if delta_time_tz<0:
-		print ('   - Time zone: ' + self.TZ + ' '+ delta_time_tz)
-	else:
-		print ('   - Time zone: ' + self.TZ + ' +'+ delta_time_tz)
-	print ('=====================================================================================\n')
-	print ('- Waktu Konjungsi: %d %d %d M %02d:%02d:%02d LT' % (konjungsi.day,n1_bln,konjungsi.year,konjungsi.hour,konjungsi.minute,konjungsi.second))
-	print ('- Waktu Matahari Terbenam: %02d:%02d:%02d                       - Waktu Bulan Terbenam: %02d:%02d:%02d' % (sun_set.hour,sun_set.minute,sun_set.second, moon_set.hour,moon_set.minute,moon_set.second))
+        print (f"                 Data Astronomi {bln_h} {thn_h} H")
+        print (f"              Jet Propulsion Laboratory (JPL) Ephemeris, by Fika Afhamul Fuscha")
+        print ('\n')
+        print ('- Perhitungan telah dilakukan untuk menentukan waktu matahari terbenam pada %02d:%02d:%02d di tanggal %d %d %d M' % (sun_set.hour,sun_set.minute,sun_set.second,sun_set.day,n_bln,sun_set.year))
+        print ('- Semua data disajikan dalam waktu lokal pengamat')
+        if self.lokasi is None:
+        	print ('Lokasi: ')
+        else:
+        	print ('- Lokasi: ' + self.lokasi)
+        print ('   - Lintang: ' + (latitude) + '  Bujur: ' + (longitude) + '  Elevasi: %.2f m' % self.TT)
+        if delta_time_tz<0:
+        	print ('   - Time zone: ' + self.TZ + ' '+ delta_time_tz)
+        else:
+        	print ('   - Time zone: ' + self.TZ + ' +'+ delta_time_tz)
+        print ('=====================================================================================\n')
+        print ('- Waktu Konjungsi: %d %d %d M %02d:%02d:%02d LT' % (konjungsi.day,n1_bln,konjungsi.year,konjungsi.hour,konjungsi.minute,konjungsi.second))
+        print ('- Waktu Matahari Terbenam: %02d:%02d:%02d                       - Waktu Bulan Terbenam: %02d:%02d:%02d' % (sun_set.hour,sun_set.minute,sun_set.second, moon_set.hour,moon_set.minute,moon_set.second))
 
 
     def new_moon(self):
