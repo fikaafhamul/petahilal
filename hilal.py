@@ -44,6 +44,9 @@ class awalbulan:
 
         return JDE
 
+    def cetak(self):
+        
+
     def new_moon(self):
         temp = fungsi.caldat(self.JDE, 0, "JD_LENGKAP").result
         temp = list(temp)
