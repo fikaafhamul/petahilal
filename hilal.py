@@ -56,7 +56,7 @@ class awalbulan:
         longitude = fungsi.konversi(self.lon, "BUJUR")
         konjungsi = self.konjungsi
         temp = sun_set.tzinfo.utcoffset(sun_set)
-        delta_time_tz = int(a.total_seconds()/3600)
+        delta_time_tz = int(temp.total_seconds()/3600)
         n1_bln = fungsi.miladi().bulan_miladi(konjungsi.month)
 	    
         print ('\n')
