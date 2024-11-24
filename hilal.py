@@ -45,16 +45,18 @@ class awalbulan:
 
         return JDE
 
-    def cetak(self, sun_set):
+    def cetak(self, sun_set, konjungsi, moon_set):
 	bln_h = fungsi.hijriah.bulan_hijriah(self.bulan)
 	thn_h = self.tahun
 	sun_set = sun_set[0]
+	moon_set = moon_set[0]
 	n_bln = fungsi.miladi.bulan_miladi(sun_set.month)
 	latitude = fungsi.konversi(self.lat, "LINTANG")
 	longitude = fungsi.konversi(self.lon, "BUJUR")
-	
+	konjungsi = konjungsi[0]
 	temp = sun_set[0].tzinfo.utcoffset(A[0])
 	delta_time_tz = int(a.total_seconds()/3600)
+	n1_bln = fungsi.miladi.bulan_miladi(konjungsi.month)
 	    
         print ('\n')
 	print (f"                 Data Astronomi {bln_h} {thn_h} H")
@@ -72,8 +74,8 @@ class awalbulan:
 	else:
 		print ('   - Time zone: ' + self.TZ + ' +'+ delta_time_tz)
 	print ('=====================================================================================\n')
-	print ('- Conjuction time: %d-%d-%d %02d:%02d:%02d LT or %d-%d-%d %02d:%02d:%02d UTC' % (ijtima_local.day,ijtima_local.month,ijtima_local.year,ijtima_local.hour,ijtima_local.minute,ijtima_local.second,ijtima_utc.day,ijtima_utc.month,ijtima_utc.year,ijtima_utc.hour,ijtima_utc.minute,ijtima_utc.second))
-	print ('- Sunset: %02d:%02d:%02d                       - Moonset: %02d:%02d:%02d' % (sunset_local.hour,sunset_local.minute,sunset_local.second, moonset_local.hour,moonset_local.minute,moonset_local.second))
+	print ('- Waktu Konjungsi: %d %d %d M %02d:%02d:%02d LT' % (konjungsi.day,n1_bln,konjungsi.year,konjungsi.hour,konjungsi.minute,konjungsi.second))
+	print ('- Waktu Matahari Terbenam: %02d:%02d:%02d                       - Waktu Bulan Terbenam: %02d:%02d:%02d' % (sun_set.hour,sun_set.minute,sun_set.second, moon_set.hour,moon_set.minute,moon_set.second))
 	print ('- Sun altitude: '+print_angle(sun_alt)+'              - Moon age: '+print_timedelta(moon_age))
 	print ('- Sun azimuth: '+print_angle(sun_az)+'              - Moon lag time: '+print_timedelta(moon_lag_time))
 	print ('- Crescent width: '+print_angle(width)+'             - Moon altitude: '+print_angle(moon_alt))
