@@ -28,7 +28,7 @@ class awalbulan:
         self.JDE = self.hitung_jde()  # Menghitung JDE saat inisialisasi
         self.newmoon = self.new_moon()  # Mengambil nilai konjungsi saat inisialisasi
         self.moonrise_moonset = self.rise_set_moon()
-        self.konjungsi, self.jd, self.sunset, self.moonset, self.altitude, self.elongasi, self.moonage = self.calculate_hilal()  # Simpan hasil ke atribut
+        self.konjungsi, self.jd, self.sunset, self.moonset, self.altitude, self.elongasi, self.moonage, self.hasil = self.calculate_hilal()  # Simpan hasil ke atribut
 
     def hitung_jde(self):
         # Menghitung Hy
@@ -53,7 +53,7 @@ class awalbulan:
         n_bln = fungsi.miladi.bulan_miladi(sun_set.month)
         latitude = fungsi.konversi(self.lat, "LINTANG")
         longitude = fungsi.konversi(self.lon, "BUJUR")
-        konjungsi = konjungsi[0]
+        konjungsi = konjungsi
         temp = sun_set[0].tzinfo.utcoffset(A[0])
         delta_time_tz = int(a.total_seconds()/3600)
         n1_bln = fungsi.miladi.bulan_miladi(konjungsi.month)
@@ -225,4 +225,5 @@ class awalbulan:
         alt = alt.degrees
         el_topo = topo_sun.separation_from(topo_moon).degrees
 
-        return konjungsi_times, jd, sunset_time_local, moonset_time_local, alt, el_topo, moonage
+	hasil = fungsi.tangkap_print(cetak(sunset_time_local, konjungsi_times, moonset_time_local))
+        return konjungsi_times, jd, sunset_time_local, moonset_time_local, alt, el_topo, moonage, hasil
