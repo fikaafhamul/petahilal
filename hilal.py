@@ -50,18 +50,19 @@ class awalbulan:
 	thn_h = self.tahun
 	sun_set = sun_set
 	n_bln = fungsi.miladi.bulan_miladi(sun_set.month)
+	latitude = fungsi.konversi(self.lat, "LINTANG")
+	longitude = fungsi.konversi(self.lon, "BUJUR")
         print ('\n')
 	print (f"                 Data Astronomi {bln_h} {thn_h} H")
 	print (f"              Jet Propulsion Laboratory (JPL) Ephemeris, by Fika Afhamul Fuscha")
 	print ('\n')
-	print ('- Perhitungan telah dilakukan untuk menentukan waktu matahari terbenam pada %02d:%02d:%02d di tanggal %d %d %d' % (sun_set.hour,sun_set.minute,sun_set.second,sun_set.day,n_bln,sun_set.year))
-	print ('- All data are in local observer time')
-	print ('- Atmosphere refraction: Temperature: %d °C  Pressure: %d mb' % (temperature_C, pressure_mbar))
-	if loc_name is None:
-		print ('Location: ')
+	print ('- Perhitungan telah dilakukan untuk menentukan waktu matahari terbenam pada %02d:%02d:%02d di tanggal %d %d %d M' % (sun_set.hour,sun_set.minute,sun_set.second,sun_set.day,n_bln,sun_set.year))
+	print ('- Semua data disajikan dalam waktu lokal pengamat')
+	if self.lokasi is None:
+		print ('Lokasi: ')
 	else:
-		print ('- Location: '+loc_name)
-	print ('   - Long: '+print_angle(longitude)+'  Lat: '+print_angle(latitude)+'  Elev: %.2f m' % elevation)
+		print ('- Lokasi: ' + self.lokasi)
+	print ('   - Lintang: ' + (latitude) + '  Bujur: ' + (longitude) + '  Elevasi: %.2f m' % self.TT)
 	if delta_time_tz<0:
 		print ('   - Time zone: '+time_zone_str+' '+print_timedelta_tz(delta_time_tz))
 	else:
