@@ -61,7 +61,7 @@ class awalbulan:
 	    
         print ('\n')
         print (f"                 Data Astronomi {bln_h} {thn_h} H")
-        print (f"         Jet Propulsion Laboratory (JPL) Ephemeris, by Fika Afhamul Fuscha")
+        print (f"    Jet Propulsion Laboratory (JPL) Ephemeris, by Fika Afhamul Fuscha")
         print ('\n')
         print ('- Perhitungan telah dilakukan untuk menentukan waktu matahari terbenam pada %02d:%02d:%02d di tanggal %d %s %d M' % (sun_set.hour,sun_set.minute,sun_set.second,sun_set.day,n_bln,sun_set.year))
         print ('- Semua data disajikan dalam waktu lokal pengamat')
@@ -69,7 +69,7 @@ class awalbulan:
         	print ('Lokasi: ')
         else:
         	print ('- Lokasi: ' + self.lokasi)
-        print ('   - Lintang: ' + (latitude) + '  Bujur: ' + (longitude) + '  Elevasi: %.2f m' % self.TT)
+        print ('   - Lintang: ' + str(latitude) + '  Bujur: ' + str(longitude) + '  Elevasi: %.2f m' % self.TT)
         if delta_time_tz<0:
         	print ('   - Time zone: ' + self.TZ + ' '+ delta_time_tz)
         else:
