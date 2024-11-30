@@ -201,8 +201,8 @@ class awalbulan:
         sun_set = self.sunset[0]
         moon_set = self.moonset[0]
         n_bln = fungsi.miladi().bulan_miladi(sun_set.month)
-        latitude = fungsi.konversi(self.lat, "LINTANG")
-        longitude = fungsi.konversi(self.lon, "BUJUR")
+        latitude = fungsi.konversi(self.lat, "LINTANG").result
+        longitude = fungsi.konversi(self.lon, "BUJUR").result
         konjungsi = self.konjungsi
         temp = sun_set.tzinfo.utcoffset(sun_set)
         delta_time_tz = int(temp.total_seconds()/3600)
@@ -218,7 +218,7 @@ class awalbulan:
         	print ('Lokasi: ')
         else:
         	print ('- Lokasi: ' + self.lokasi)
-        print ('   - Lintang: ' + str(latitude) + '  Bujur: ' + str(longitude) + '  Elevasi: %.2f m' % self.TT)
+        print ('   - Lintang: ' + latitude + '  Bujur: ' + longitude + '  Elevasi: %.2f m' % self.TT)
         if delta_time_tz<0:
         	print ('   - Time zone: ' + self.TZ + ' '+ delta_time_tz)
         else:
