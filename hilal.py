@@ -173,7 +173,7 @@ class awalbulan:
         moonage = (temp1 - temp)
 
         # Menghitung waktu terbenam Bulan
-        moonriset, moonBol = almanac.find_discrete(t0, t1, self.moonrise_moonset)
+        moonriset, moonBol = almanac.find_discrete(jd, jd + timedelta(days=1), self.moonrise_moonset)
         moonset_time = moonriset[moonBol == 0]
 
         # Ubah ke waktu UTC
@@ -224,5 +224,5 @@ class awalbulan:
         else:
         	print ('   - Time zone: ' + self.TZ + ' +'+ str(delta_time_tz))
         print ('=====================================================================================\n')
-        print ('- Waktu Konjungsi: %d %s %d M %02d:%02d:%02d LT' % (konjungsi.day,n1_bln,konjungsi.year,konjungsi.hour,konjungsi.minute,konjungsi.second))
-        print ('- Waktu Matahari Terbenam: %02d:%02d:%02d                       - Waktu Bulan Terbenam: %02d:%02d:%02d' % (sun_set.hour,sun_set.minute,sun_set.second, moon_set.hour,moon_set.minute,moon_set.second))
+        print ('- Waktu Konjungsi         : %d %s %d M %02d:%02d:%02d LT' % (konjungsi.day,n1_bln,konjungsi.year,konjungsi.hour,konjungsi.minute,konjungsi.second))
+        print ('- Waktu Matahari Terbenam : %02d:%02d:%02d                       - Waktu Bulan Terbenam: %02d:%02d:%02d' % (sun_set.hour,sun_set.minute,sun_set.second, moon_set.hour,moon_set.minute,moon_set.second))
