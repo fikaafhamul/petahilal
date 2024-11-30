@@ -1,4 +1,6 @@
 class konversi:
+    import io
+    import sys
     def __init__(self, angle, pilihan="DERAJAT"):
         self.angle = angle  # Menyimpan nilai angle ke dalam atribut instance
         pilihan = pilihan.upper()
