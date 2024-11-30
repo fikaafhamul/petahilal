@@ -220,9 +220,9 @@ class awalbulan:
         	print ('- Lokasi: ' + self.lokasi)
         print ('   - Lintang: ' + latitude + '  Bujur: ' + longitude + '  Elevasi: %.2f m' % self.TT)
         if delta_time_tz<0:
-        	print ('   - Time zone: ' + self.TZ + ' '+ delta_time_tz)
+        	print ('   - Time zone: ' + self.TZ + ' '+ str(delta_time_tz))
         else:
-        	print ('   - Time zone: ' + self.TZ + ' +'+ delta_time_tz)
+        	print ('   - Time zone: ' + self.TZ + ' +'+ str(delta_time_tz))
         print ('=====================================================================================\n')
         print ('- Waktu Konjungsi: %d %s %d M %02d:%02d:%02d LT' % (konjungsi.day,n1_bln,konjungsi.year,konjungsi.hour,konjungsi.minute,konjungsi.second))
         print ('- Waktu Matahari Terbenam: %02d:%02d:%02d                       - Waktu Bulan Terbenam: %02d:%02d:%02d' % (sun_set.hour,sun_set.minute,sun_set.second, moon_set.hour,moon_set.minute,moon_set.second))
