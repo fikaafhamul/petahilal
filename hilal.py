@@ -29,7 +29,7 @@ class awalbulan:
         self.newmoon = self.new_moon()  # Mengambil nilai konjungsi saat inisialisasi
         self.moonrise_moonset = self.rise_set_moon()
         self.konjungsi, self.jd, self.sunset, self.moonset, self.altitude, self.elongasi, self.moonage= self.calculate_hilal()  # Simpan hasil ke atribut
-        self.cetak = fungsi.tangkap_print(self.cetak())
+        self.cetak = self.cetak()
 	    
     def hitung_jde(self):
         # Menghitung Hy
