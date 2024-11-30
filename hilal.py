@@ -208,7 +208,7 @@ class awalbulan:
         delta_time_tz = int(temp.total_seconds()/3600)
         n1_bln = fungsi.miladi().bulan_miladi(konjungsi.month)
 
-        title = "Data Astronomi {bln_h} {thn_h} H"
+        title = "Data Astronomi " + bln_h + " " + thn_h + " H"
         title1 = "Jet Propulsion Laboratory (JPL) Ephemeris, by Fika Afhamul Fuscha"
 	    
         print ('\n')
