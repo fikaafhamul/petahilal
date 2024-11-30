@@ -198,8 +198,6 @@ class awalbulan:
     def cetak(self):
         bln_h = fungsi.hijriah().bulan_hijriah(self.bulan)
         thn_h = self.tahun
-        sun_set = self.sunset[0]
-        moon_set = self.moonset[0]
         n_bln = fungsi.miladi().bulan_miladi(sun_set.month)
         latitude = fungsi.konversi(self.lat, "LINTANG").result
         longitude = fungsi.konversi(self.lon, "BUJUR").result
@@ -208,6 +206,37 @@ class awalbulan:
         delta_time_tz = int(temp.total_seconds()/3600)
         n1_bln = fungsi.miladi().bulan_miladi(konjungsi.month)
 
+        # Menghitung Lintang dan Bujur Pengamat
+        longlat = api.Topos(latitude=self.lat, longitude=self.lon, elevation_m=self.TT)
+
+        # import data benda langit
+        earth = e['earth']
+        moon = e['moon']
+        sun = e['sun']
+        observer = earth + longlat
+
+        # Mengatur rentang waktu
+        t0 = self.jd
+        t1 = t0 + timedelta(days=1)
+
+        sunriset, sunBol = almanac.find_discrete(t0, t1, almanac.sunrise_sunset(e, longlat))
+        sunset_time = sunriset[sunBol == 0]  # 0 menandakan waktu terbenam
+
+        # Ubah ke waktu UTC
+        sunset_time_utc = sunset_time.utc_iso()
+
+        # Ubah ke waktu lokal
+        sunset_time_local = sunset_time.astimezone(ZonaWaktu)
+
+        # Menghitung Umur Bulan
+        temp = konjungsi_time.hour + (konjungsi_time.minute)/60 + (konjungsi_time.second)/3600
+        temp1 = sunset_time_local[0]
+        temp1 = temp1.hour + (temp1.minute)/60 + (temp1.second)/3600
+        moonage = (temp1 - temp)
+
+        sunset = sunset_time_local[0]
+        moon_set = self.moonset[0]
+
         title = "Data Astronomi " + str(bln_h) + " " + str(thn_h) + " H"
         title1 = "Jet Propulsion Laboratory (JPL) Ephemeris, by Fika Afhamul Fuscha"
 	    
@@ -215,7 +244,7 @@ class awalbulan:
         print (f'{title:^120}')
         print (f'{title1:^120}')
         print ('\n')
-        print ('- Perhitungan telah dilakukan untuk menentukan waktu matahari terbenam pada %02d:%02d:%02d di tanggal %d %s %d M' % (sun_set.hour,sun_set.minute,sun_set.second,sun_set.day,n_bln,sun_set.year))
+        print ('- Perhitungan telah dilakukan untuk menentukan waktu matahari terbenam pada %02d:%02d:%02d di tanggal %d %s %d M' % (sunset.hour,sunset.minute,sunset.second,sunset.day,n_bln,sunset.year))
         print ('- Semua data disajikan dalam waktu lokal pengamat')
         if self.lokasi is None:
         	print ('Lokasi: ')
@@ -228,4 +257,4 @@ class awalbulan:
         	print ('   - Time zone: ' + self.TZ + ' +'+ str(delta_time_tz))
         print (f'{"".join(["="]*120)} \n')
         print ('- Waktu Konjungsi         : %d %s %d M %02d:%02d:%02d LT' % (konjungsi.day,n1_bln,konjungsi.year,konjungsi.hour,konjungsi.minute,konjungsi.second))
-        print ('- Waktu Matahari Terbenam : %02d:%02d:%02d                          - Waktu Bulan Terbenam: %02d:%02d:%02d' % (sun_set.hour,sun_set.minute,sun_set.second, moon_set.hour,moon_set.minute,moon_set.second))
+        print ('- Waktu Matahari Terbenam : %02d:%02d:%02d                          - Waktu Bulan Terbenam: %02d:%02d:%02d' % (sunset.hour,sunset.minute,sunset.second, moon_set.hour,moon_set.minute,moon_set.second))
