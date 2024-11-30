@@ -207,10 +207,13 @@ class awalbulan:
         temp = sun_set.tzinfo.utcoffset(sun_set)
         delta_time_tz = int(temp.total_seconds()/3600)
         n1_bln = fungsi.miladi().bulan_miladi(konjungsi.month)
+
+	title = "Data Astronomi {bln_h} {thn_h} H"
+	title1 = "Jet Propulsion Laboratory (JPL) Ephemeris, by Fika Afhamul Fuscha"
 	    
         print ('\n')
-        print (f"                                              Data Astronomi {bln_h} {thn_h} H")
-        print (f"                               Jet Propulsion Laboratory (JPL) Ephemeris, by Fika Afhamul Fuscha")
+        print (f'{title:^120}')
+        print (f'{title1:^120}')
         print ('\n')
         print ('- Perhitungan telah dilakukan untuk menentukan waktu matahari terbenam pada %02d:%02d:%02d di tanggal %d %s %d M' % (sun_set.hour,sun_set.minute,sun_set.second,sun_set.day,n_bln,sun_set.year))
         print ('- Semua data disajikan dalam waktu lokal pengamat')
@@ -223,6 +226,6 @@ class awalbulan:
         	print ('   - Time zone: ' + self.TZ + ' '+ str(delta_time_tz))
         else:
         	print ('   - Time zone: ' + self.TZ + ' +'+ str(delta_time_tz))
-        print ('=====================================================================================\n')
+        print ('{"".join(["="]*120)} \n')
         print ('- Waktu Konjungsi         : %d %s %d M %02d:%02d:%02d LT' % (konjungsi.day,n1_bln,konjungsi.year,konjungsi.hour,konjungsi.minute,konjungsi.second))
         print ('- Waktu Matahari Terbenam : %02d:%02d:%02d                          - Waktu Bulan Terbenam: %02d:%02d:%02d' % (sun_set.hour,sun_set.minute,sun_set.second, moon_set.hour,moon_set.minute,moon_set.second))
