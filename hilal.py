@@ -228,14 +228,35 @@ class awalbulan:
         # Ubah ke waktu lokal
         sunset_time_local = sunset_time.astimezone(ZonaWaktu)
 
+        # Menghitung waktu terbenam Bulan
+        moonriset, moonBol = almanac.find_discrete(t0, t1, self.moonrise_moonset)
+        moonset_time = moonriset[moonBol == 0]
+
+        # Ubah ke waktu UTC
+        moonset_time_utc = moonset_time.utc_iso()
+
+        # Ubah ke waktu lokal
+        moonset_time_local = moonset_time.astimezone(ZonaWaktu)
+
+        # Menghitung Tinggi dan Elongasi Bulan
+        geo_moon = earth.at(sunset_time[0]).observe(moon).apparent()
+        geo_sun = earth.at(sunset_time[0]).observe(sun).apparent()
+        el_geo = geo_sun.separation_from(geo_moon).degrees
+
+        topo_moon = observer.at(sunset_time[0]).observe(moon).apparent()
+        topo_sun = observer.at(sunset_time[0]).observe(sun).apparent()
+        alt, az, distance = topo_moon.altaz()
+        alt = alt.degrees
+        el_topo = topo_sun.separation_from(topo_moon).degrees
+
         # Menghitung Umur Bulan
-        temp = konjungsi_time.hour + (konjungsi_time.minute)/60 + (konjungsi_time.second)/3600
+        temp = konjungsi.hour + (konjungsi.minute)/60 + (konjungsi.second)/3600
         temp1 = sunset_time_local[0]
         temp1 = temp1.hour + (temp1.minute)/60 + (temp1.second)/3600
         moonage = (temp1 - temp)
 
         sunset = sunset_time_local[0]
-        moon_set = self.moonset[0]
+        moonset = moonset_time_local[0]
 
         title = "Data Astronomi " + str(bln_h) + " " + str(thn_h) + " H"
         title1 = "Jet Propulsion Laboratory (JPL) Ephemeris, by Fika Afhamul Fuscha"
@@ -257,4 +278,4 @@ class awalbulan:
         	print ('   - Time zone: ' + self.TZ + ' +'+ str(delta_time_tz))
         print (f'{"".join(["="]*120)} \n')
         print ('- Waktu Konjungsi         : %d %s %d M %02d:%02d:%02d LT' % (konjungsi.day,n1_bln,konjungsi.year,konjungsi.hour,konjungsi.minute,konjungsi.second))
-        print ('- Waktu Matahari Terbenam : %02d:%02d:%02d                          - Waktu Bulan Terbenam: %02d:%02d:%02d' % (sunset.hour,sunset.minute,sunset.second, moon_set.hour,moon_set.minute,moon_set.second))
+        print ('- Waktu Matahari Terbenam : %02d:%02d:%02d                          - Waktu Bulan Terbenam: %02d:%02d:%02d' % (sunset.hour,sunset.minute,sunset.second, moonset.hour,moonset.minute,moonset.second))
