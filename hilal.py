@@ -157,7 +157,7 @@ class awalbulan:
 
         konjungsi_times = new_moon_times[0]
 
-        sunriset, sunBol = almanac.find_discrete(t0, t1, almanac.sunrise_sunset(e, longlat))
+        sunriset, sunBol = almanac.find_discrete(jd, jd + timedelta(days=1), almanac.sunrise_sunset(e, longlat))
         sunset_time = sunriset[sunBol == 0]  # 0 menandakan waktu terbenam
 
         # Ubah ke waktu UTC
