@@ -209,8 +209,8 @@ class awalbulan:
         n1_bln = fungsi.miladi().bulan_miladi(konjungsi.month)
 	    
         print ('\n')
-        print (f"                 Data Astronomi {bln_h} {thn_h} H")
-        print (f"    Jet Propulsion Laboratory (JPL) Ephemeris, by Fika Afhamul Fuscha")
+        print (f"                                              Data Astronomi {bln_h} {thn_h} H")
+        print (f"                               Jet Propulsion Laboratory (JPL) Ephemeris, by Fika Afhamul Fuscha")
         print ('\n')
         print ('- Perhitungan telah dilakukan untuk menentukan waktu matahari terbenam pada %02d:%02d:%02d di tanggal %d %s %d M' % (sun_set.hour,sun_set.minute,sun_set.second,sun_set.day,n_bln,sun_set.year))
         print ('- Semua data disajikan dalam waktu lokal pengamat')
