@@ -4,6 +4,7 @@ from skyfield.nutationlib import iau2000b
 from skyfield.framelib import ecliptic_frame
 from datetime import timedelta
 from pytz import timezone
+from math import sin, cos, asin, degrees, radians
 from . import fungsi
 
 ts = api.load.timescale()
@@ -250,9 +251,15 @@ class awalbulan:
         sun_alt, sun_az = sun_alt.degrees, sun_az.degrees
         el_topo = topo_sun.separation_from(topo_moon).degrees
 
-	#Menghitung Iluminasi Bulan
-        illumination = topo_moon.fraction_illuminated(sun)*100
-	    
+	# Menghitung Iluminasi Bulan
+        illumination = topo_moon.fraction_illuminated(sun)*100 
+
+	# Menghitung Lebar Sabit Bulan
+        horizontalparalax = degrees(asin(6378.14/moon_distance.km))
+        semidiameter= (358473400/moon_distance.km)/3600
+        SD = semidiameter * horizontalparalax
+        SD1 = SD * (1 + sin(radians(moon_alt))*sin(radians(horizontalparalax)))
+        W = SD1 * (1-cos(radians(el_topo)))
 	
         # Menghitung Umur Bulan
         temp = konjungsi.hour + (konjungsi.minute)/60 + (konjungsi.second)/3600
@@ -262,7 +269,13 @@ class awalbulan:
 
         sunset = sunset_time_local[0]
         moonset = moonset_time_local[0]
+	    
+	# Lama Hilal
+        temp = sunset.hour + (sunset.minute)/60 + (sunset.second)/3600
+        temp1 = moonset.hour + (moonset.minute)/60 + (moonset.second)/3600
+        lag_time = (temp1 - temp)
 
+	    
         n_bln = fungsi.miladi().bulan_miladi(sunset.month)
         temp = sunset.tzinfo.utcoffset(sunset)
         delta_time_tz = int(temp.total_seconds()/3600)
@@ -289,4 +302,7 @@ class awalbulan:
         print ('- Waktu Konjungsi         : %d %s %d M %02d:%02d:%02d LT' % (konjungsi.day,n1_bln,konjungsi.year,konjungsi.hour,konjungsi.minute,konjungsi.second))
         print ('- Waktu Matahari Terbenam : %02d:%02d:%02d                          - Waktu Bulan Terbenam : %02d:%02d:%02d' % (sunset.hour,sunset.minute,sunset.second, moonset.hour,moonset.minute,moonset.second))
         print ('- Ketinggian Matahari     : %s                    - Ketinggian Bulan     : %s' % (fungsi.konversi(sun_alt).result,fungsi.konversi(moon_alt).result))  
-        print ('- Azimut Matahari         : %s                    - Azimut Bulan         : %s' % (fungsi.konversi(sun_az).result,fungsi.konversi(moon_az).result))  
+        print ('- Azimut Matahari         : %s                   - Azimut Bulan         : %s' % (fungsi.konversi(sun_az).result,fungsi.konversi(moon_az).result))  
+        print ('- Lebar Sabit Bulan       : %s                   - Elongasi Bulan (Geosentris)         : %s' % (fungsi.konversi(W).result,fungsi.konversi(el_geo).result))  
+        print ('- Iluminasi Bulan         : %.2f %                  - Elongasi Bulan (Toposentris)         : %s' % (illumination,fungsi.konversi(el_topo).result))  
+        print ('- Umur Bulan         : %s                  - Lama Bulan di atas Ufuk         : %s' % (fungsi.konversi(moonage, "JAM1").result,fungsi.konversi(lag_time,"JAM1").result))
