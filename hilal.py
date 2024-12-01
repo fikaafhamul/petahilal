@@ -304,5 +304,5 @@ class awalbulan:
         print ('- Ketinggian Matahari     : %s                    - Ketinggian Bulan     : %s' % (fungsi.konversi(sun_alt).result,fungsi.konversi(moon_alt).result))  
         print ('- Azimut Matahari         : %s                   - Azimut Bulan         : %s' % (fungsi.konversi(sun_az).result,fungsi.konversi(moon_az).result))  
         print ('- Lebar Sabit Bulan       : %s                   - Elongasi Bulan (Geosentris)         : %s' % (fungsi.konversi(W).result,fungsi.konversi(el_geo).result))  
-        print ('- Iluminasi Bulan         : %.2f %                  - Elongasi Bulan (Toposentris)         : %s' % (illumination,fungsi.konversi(el_topo).result))  
+        print ('- Iluminasi Bulan         : %.2f %                  - Elongasi Bulan (Toposentris)         : %s' % (float(illumination),fungsi.konversi(el_topo).result))  
         print ('- Umur Bulan         : %s                  - Lama Bulan di atas Ufuk         : %s' % (fungsi.konversi(moonage, "JAM1").result,fungsi.konversi(lag_time,"JAM1").result))
