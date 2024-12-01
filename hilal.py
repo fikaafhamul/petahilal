@@ -245,8 +245,10 @@ class awalbulan:
 
         topo_moon = observer.at(sunset_time[0]).observe(moon).apparent()
         topo_sun = observer.at(sunset_time[0]).observe(sun).apparent()
-        alt, az, distance = topo_moon.altaz()
-        alt = alt.degrees
+        moon_alt, moon_az, moon_distance = topo_moon.altaz()
+        moon_alt, moon_az = moon_alt.degrees, moon_az.degrees
+        sun_alt, sun_az, sun_distance = topo_sun.altaz()
+        sun_alt, sun_az = sun_alt.degrees, sun_az.degrees
         el_topo = topo_sun.separation_from(topo_moon).degrees
 
         # Menghitung Umur Bulan
@@ -278,4 +280,6 @@ class awalbulan:
         	print ('   - Time zone: ' + self.TZ + ' +'+ str(delta_time_tz))
         print (f'{"".join(["="]*120)} \n')
         print ('- Waktu Konjungsi         : %d %s %d M %02d:%02d:%02d LT' % (konjungsi.day,n1_bln,konjungsi.year,konjungsi.hour,konjungsi.minute,konjungsi.second))
-        print ('- Waktu Matahari Terbenam : %02d:%02d:%02d                          - Waktu Bulan Terbenam: %02d:%02d:%02d' % (sunset.hour,sunset.minute,sunset.second, moonset.hour,moonset.minute,moonset.second))
+        print ('- Waktu Matahari Terbenam : %02d:%02d:%02d                          - Waktu Bulan Terbenam : %02d:%02d:%02d' % (sunset.hour,sunset.minute,sunset.second, moonset.hour,moonset.minute,moonset.second))
+        print ('- Ketinggian Matahari     : %s                                      - Ketinggian Bulan     : %s' % (fungsi.konversi(sun_alt).result,fungsi.konversi(moon_alt).result))  
+        print ('- Azimut Matahari         : %s                                      - Azimut Bulan         : %s' % (fungsi.konversi(sun_az).result,fungsi.konversi(moon_az).result))  
