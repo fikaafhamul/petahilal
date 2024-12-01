@@ -198,12 +198,9 @@ class awalbulan:
     def cetak(self):
         bln_h = fungsi.hijriah().bulan_hijriah(self.bulan)
         thn_h = self.tahun
-        n_bln = fungsi.miladi().bulan_miladi(sun_set.month)
         latitude = fungsi.konversi(self.lat, "LINTANG").result
         longitude = fungsi.konversi(self.lon, "BUJUR").result
         konjungsi = self.konjungsi
-        temp = sun_set.tzinfo.utcoffset(sun_set)
-        delta_time_tz = int(temp.total_seconds()/3600)
         n1_bln = fungsi.miladi().bulan_miladi(konjungsi.month)
 
         # Menghitung Lintang dan Bujur Pengamat
@@ -259,6 +256,10 @@ class awalbulan:
 
         sunset = sunset_time_local[0]
         moonset = moonset_time_local[0]
+
+        n_bln = fungsi.miladi().bulan_miladi(sunset.month)
+        temp = sunset.tzinfo.utcoffset(sunset)
+        delta_time_tz = int(temp.total_seconds()/3600)
 
         title = "Data Astronomi " + str(bln_h) + " " + str(thn_h) + " H"
         title1 = "Jet Propulsion Laboratory (JPL) Ephemeris, by Fika Afhamul Fuscha"
