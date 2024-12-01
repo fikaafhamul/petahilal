@@ -202,6 +202,7 @@ class awalbulan:
         longitude = fungsi.konversi(self.lon, "BUJUR").result
         konjungsi = self.konjungsi
         n1_bln = fungsi.miladi().bulan_miladi(konjungsi.month)
+        ZonaWaktu = timezone(self.TZ)
 
         # Menghitung Lintang dan Bujur Pengamat
         longlat = api.Topos(latitude=self.lat, longitude=self.lon, elevation_m=self.TT)
