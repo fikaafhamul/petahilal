@@ -283,5 +283,5 @@ class awalbulan:
         print (f'{"".join(["="]*120)} \n')
         print ('- Waktu Konjungsi         : %d %s %d M %02d:%02d:%02d LT' % (konjungsi.day,n1_bln,konjungsi.year,konjungsi.hour,konjungsi.minute,konjungsi.second))
         print ('- Waktu Matahari Terbenam : %02d:%02d:%02d                          - Waktu Bulan Terbenam : %02d:%02d:%02d' % (sunset.hour,sunset.minute,sunset.second, moonset.hour,moonset.minute,moonset.second))
-        print ('- Ketinggian Matahari     : %s                                      - Ketinggian Bulan     : %s' % (fungsi.konversi(sun_alt).result,fungsi.konversi(moon_alt).result))  
-        print ('- Azimut Matahari         : %s                                      - Azimut Bulan         : %s' % (fungsi.konversi(sun_az).result,fungsi.konversi(moon_az).result))  
+        print ('- Ketinggian Matahari     : %s                    - Ketinggian Bulan     : %s' % (fungsi.konversi(sun_alt).result,fungsi.konversi(moon_alt).result))  
+        print ('- Azimut Matahari         : %s                    - Azimut Bulan         : %s' % (fungsi.konversi(sun_az).result,fungsi.konversi(moon_az).result))  
