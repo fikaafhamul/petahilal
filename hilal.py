@@ -1,6 +1,7 @@
 from skyfield import api
 from skyfield import almanac
 from skyfield.nutationlib import iau2000b
+from skyfield.frameLib import ecliptic_frame
 from datetime import timedelta
 from pytz import timezone
 from . import fungsi
@@ -236,7 +237,7 @@ class awalbulan:
         # Ubah ke waktu lokal
         moonset_time_local = moonset_time.astimezone(ZonaWaktu)
 
-        # Menghitung Tinggi dan Elongasi Bulan
+        # Menghitung Tinggi, azimut dan Elongasi Bulan
         geo_moon = earth.at(sunset_time[0]).observe(moon).apparent()
         geo_sun = earth.at(sunset_time[0]).observe(sun).apparent()
         el_geo = geo_sun.separation_from(geo_moon).degrees
@@ -249,6 +250,10 @@ class awalbulan:
         sun_alt, sun_az = sun_alt.degrees, sun_az.degrees
         el_topo = topo_sun.separation_from(topo_moon).degrees
 
+	#Menghitung Iluminasi Bulan
+        illumination = topo_moon.fraction_illuminated(sun)*100
+	    
+	
         # Menghitung Umur Bulan
         temp = konjungsi.hour + (konjungsi.minute)/60 + (konjungsi.second)/3600
         temp1 = sunset_time_local[0]
