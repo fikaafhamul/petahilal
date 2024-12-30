@@ -236,7 +236,7 @@ class awalbulan:
 
             kn = soup.find_all('p', class_='text-sm md:text-lg font-bold mt-4')
             situasi = []
-            for data in ar:
+            for data in kn:
                 situasi.append(data.text)
         else:
             print("Gagal mengambil data cuaca")
