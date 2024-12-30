@@ -357,7 +357,7 @@ class awalbulan:
         print ('   - Kelembapan: ' + self.kelembapan)
         print ('   - Kecepatan Angin: ' + self.kecepatan)
         print ('   - Arah Angin: ' + self.arahangin)
-        print ('   - Jarak Pandang: ' + self.jarak)
+        print ('   - Jarak Pandang: ' + self.jarakpandang)
         print (f'{"".join(["="]*120)} \n')
         print ('- Waktu Konjungsi         : %d %s %d M %02d:%02d:%02d LT' % (konjungsi.day,n1_bln,konjungsi.year,konjungsi.hour,konjungsi.minute,konjungsi.second))
         print ('- Waktu Matahari Terbenam : %02d:%02d:%02d                          - Waktu Bulan Terbenam             : %02d:%02d:%02d' % (sunset.hour,sunset.minute,sunset.second, moonset.hour,moonset.minute,moonset.second))
