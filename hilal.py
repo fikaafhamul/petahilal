@@ -20,7 +20,7 @@ def visibilitas_oddeh(sunset, lag, separasi, lebar_sabit):
 		    
     # Menghitung q
     lebar_sabit = lebar_sabit	    
-    q = separasi - (-0.1018 * lebar_sabit ** 3 + 0.7319 * lebar_sabit **2 - 6.3226 * lebar_sabit + 7.1651)
+    q = separasi - (-0.1018 * (lebar_sabit ** 3) + 0.7319 * (lebar_sabit ** 2) - 6.3226 * lebar_sabit + 7.1651)
 
     # Parameter
     if q >= 5.65:
