@@ -349,7 +349,7 @@ class awalbulan:
         	print ('   - Time zone: ' + self.TZ + ' '+ str(delta_time_tz))
         else:
         	print ('   - Time zone: ' + self.TZ + ' +'+ str(delta_time_tz))
-	if self.id_cuaca == " ":
+        if self.id_cuaca == " ":
         	print ('')
         else:
         	print ('- Prakiraan cuaca pada jam ' + self.jam)
