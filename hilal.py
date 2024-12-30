@@ -253,6 +253,26 @@ class awalbulan:
 		
         return jam[j], suhu[j], kelembapan, kec, arah[j+4], jarak, situasi[j]
 
+    def visibilitas_oddeh(sunset, lag, separasi, lebar_sabit):
+        # Menghitung Best Time
+        best_time = sunset + 4/9 * lag
+	    
+        # Menghitung q
+        q = separasi - (-0.1018 * lebar_sabit ** 3 + 0.7319 * lebar_sabit **2 - 6.3226 * lebar_sabit + 7.1651)
+
+        # Parameter
+        if q >= 5.65:
+            parameter = "Terlihat dengan mudah meski tanpa alat bantu optik"
+        elif kriteria == "MUHAMADIYYAH":
+            jd = (t0 + timedelta(days=1)) if (alt >= 0) else (t0 + timedelta(days=2))
+        elif kriteria == "MABIMS LAMA":
+            jd = (t0 + timedelta(days=1)) if (alt >= 2 and el_geo >= 3 and moonage >= 8) else (t0 + timedelta(days=2))
+        elif kriteria == "NEO MABIMS":
+            jd = (t0 + timedelta(days=1)) if (alt >= 3 and el_geo >= 6.4) else (t0 + timedelta(days=2))
+
+
+        return JDE
+
     def cetak(self):
         bln_h = fungsi.hijriah().bulan_hijriah(self.bulan)
         thn_h = self.tahun
