@@ -12,6 +12,28 @@ from bs4 import BeautifulSoup
 ts = api.load.timescale()
 e = api.load('de440s.bsp')  # Menggunakan ephemeris DE440s
 
+_all_ = ["visibilitas_oddeh", "awalbulan"]
+	
+def visibilitas_oddeh(self, sunset, lag, separasi, lebar_sabit):
+    # Menghitung Best Time
+    best_time = sunset + 4/9 * lag
+		    
+    # Menghitung q
+    lebar_sabit = lebar_sabit * 60	    
+    q = separasi - (-0.1018 * lebar_sabit ** 3 + 0.7319 * lebar_sabit **2 - 6.3226 * lebar_sabit + 7.1651)
+
+    # Parameter
+    if q >= 5.65:
+        parameter = "Mudah teramati tanpa alat bantu optik"
+    elif (q < 5.65 and q >= 2):
+        parameter = "Mungkin teramati tanpa alat bantu optik"
+    elif (q < 2 and q >= -0.96):
+        parameter = "Terlihat hanya dengan alat bantu optik"
+    elif (q < -0.96):
+        parameter = "Tidak terlihat"
+
+    return best_time, q, parameter
+
 class awalbulan:
     def __init__(self, bulan, tahun, lok, lat, lon, TZ='Asia/Jakarta', TT = 0, TH = 0, kriteria = 'NEO MABIMS', id_cuaca = ' ', jam_cuaca = '16.00 WIB'):
         self.bulan = bulan
@@ -36,7 +58,6 @@ class awalbulan:
         self.moonrise_moonset = self.rise_set_moon()
         self.konjungsi, self.jd, self.sunset, self.moonset, self.altitude, self.elongasi, self.moonage= self.calculate_hilal()  # Simpan hasil ke atribut
         self.jam, self.suhu, self.kelembapan, self.kecepatan, self.arahangin, self.jarakpandang, self.situasi = self.weather()
-        self.best, self.q, self.parameter = self.visibilitas_oddeh(sunset, lag, separasi, lebar_sabit)
         self.cetak = self.cetak()
 	    
     def hitung_jde(self):
@@ -253,26 +274,6 @@ class awalbulan:
             jarak = kondisi[j*3+2]
 		
         return jam[j], suhu[j], kelembapan, kec, arah[j+4], jarak, situasi[j]
-
-    def visibilitas_oddeh(self, sunset, lag, separasi, lebar_sabit):
-        # Menghitung Best Time
-        best_time = sunset + 4/9 * lag
-	    
-        # Menghitung q
-        lebar_sabit = lebar_sabit * 60	    
-        q = separasi - (-0.1018 * lebar_sabit ** 3 + 0.7319 * lebar_sabit **2 - 6.3226 * lebar_sabit + 7.1651)
-
-        # Parameter
-        if q >= 5.65:
-            parameter = "Mudah teramati tanpa alat bantu optik"
-        elif (q < 5.65 and q >= 2):
-            parameter = "Mungkin teramati tanpa alat bantu optik"
-        elif (q < 2 and q >= -0.96):
-            parameter = "Terlihat hanya dengan alat bantu optik"
-        elif (q < -0.96):
-            parameter = "Tidak terlihat"
-
-        return best_time, q, parameter
 
     def cetak(self):
         bln_h = fungsi.hijriah().bulan_hijriah(self.bulan)
