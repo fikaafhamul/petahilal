@@ -227,10 +227,25 @@ class awalbulan:
             kondisi = []
             for data in k:
                 kondisi.append(data.text)
-    
+
+            ar = soup.find_all('span', class_='text-black-primary font-bold')
+            arah = []
+            for data in ar:
+                arah.append(data.text)
         else:
             print("Gagal mengambil data cuaca")
-        return 
+
+        j = jam.index(self.jam_cuaca)
+	if j == 0:
+		kelembapan = kondisi[j]
+		kec = kondisi[j+1]
+		jarak = kondisi[j+2]
+	else:
+		kelembapan = kondisi[j*3]
+		kec = kondisi[j*3+1]
+		jarak = kondisi[j*3+1]
+		
+        return jam[j], suhu[j], kelembapan, kec, arah[j+4], jarak
 
     def cetak(self):
         bln_h = fungsi.hijriah().bulan_hijriah(self.bulan)
