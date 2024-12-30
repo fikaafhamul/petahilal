@@ -249,7 +249,7 @@ class awalbulan:
         else:
             kelembapan = kondisi[j*3]
             kec = kondisi[j*3+1]
-            jarak = kondisi[j*3+1]
+            jarak = kondisi[j*3+2]
 		
         return jam[j], suhu[j], kelembapan, kec, arah[j+4], jarak, situasi[j]
 
