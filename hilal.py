@@ -237,7 +237,7 @@ class awalbulan:
             print("Gagal mengambil data cuaca")
 
         j = jam.index(self.jam_cuaca)
-	if j == 0:
+        if j == 0:
 		kelembapan = kondisi[j]
 		kec = kondisi[j+1]
 		jarak = kondisi[j+2]
