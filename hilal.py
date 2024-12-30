@@ -351,6 +351,8 @@ class awalbulan:
         temp1 = moonset.hour + (moonset.minute)/60 + (moonset.second)/3600
         lag_time = (temp1 - temp)
 
+	separasi = moon_alt - sun_alt
+	best_time, q, parameter = visibilitas_oddeh(temp, lag_time, separasi, W)
 	    
         n_bln = fungsi.miladi().bulan_miladi(sunset.month)
         temp = sunset.tzinfo.utcoffset(sunset)
@@ -374,6 +376,12 @@ class awalbulan:
         	print ('   - Time zone: ' + self.TZ + ' '+ str(delta_time_tz))
         else:
         	print ('   - Time zone: ' + self.TZ + ' +'+ str(delta_time_tz))
+		
+        print ('- Visibilitas Oddeh ')
+        print ('   - Best Time: %s' % (fungsi.konversi(best_time,"JAM")))
+        print ('   - q: ' + str(round(q,2)))
+        print ('   - Parameter: ' + parameter)
+	    
         if self.id_cuaca == " ":
         	print ('')
         else:
