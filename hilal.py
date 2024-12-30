@@ -14,7 +14,7 @@ e = api.load('de440s.bsp')  # Menggunakan ephemeris DE440s
 
 _all_ = ["visibilitas_oddeh", "awalbulan"]
 	
-def visibilitas_oddeh(self, sunset, lag, separasi, lebar_sabit):
+def visibilitas_oddeh(sunset, lag, separasi, lebar_sabit):
     # Menghitung Best Time
     best_time = sunset + 4/9 * lag
 		    
