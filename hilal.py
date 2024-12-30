@@ -361,7 +361,7 @@ class awalbulan:
         delta_time_tz = int(temp.total_seconds()/3600)
 
         title = "Data Astronomi " + str(bln_h) + " " + str(thn_h) + " H"
-        title1 = "Jet Propulsion Laboratory (JPL) Ephemeris, by Fika Afhamul Fuscha"
+        title1 = "Jet Propulsion Laboratory (JPL) Ephemeris, by Planetarium KH. Zubair Umar Al-Jailani"
 	    
         print ('\n')
         print (f'{title:^120}')
