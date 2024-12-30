@@ -49,9 +49,9 @@ class konversi:
             D += 1
 
         if self.angle < 0:
-            return f"-{D:02} : {M:02} : {S:05.2f}"
+            return f"-{D:02}:{M:02}:{S:05.2f}"
         else:
-            return f"{D:02} : {M:02} : {S:05.2f}"
+            return f"{D:02}:{M:02}:{S:05.2f}"
 
     def deg2dms1(self):
         D = int(abs(self.angle))
