@@ -258,20 +258,20 @@ class awalbulan:
         best_time = sunset + 4/9 * lag
 	    
         # Menghitung q
+        lebar_sabit = lebar_sabit * 60	    
         q = separasi - (-0.1018 * lebar_sabit ** 3 + 0.7319 * lebar_sabit **2 - 6.3226 * lebar_sabit + 7.1651)
 
         # Parameter
         if q >= 5.65:
-            parameter = "Terlihat dengan mudah meski tanpa alat bantu optik"
-        elif kriteria == "MUHAMADIYYAH":
-            jd = (t0 + timedelta(days=1)) if (alt >= 0) else (t0 + timedelta(days=2))
-        elif kriteria == "MABIMS LAMA":
-            jd = (t0 + timedelta(days=1)) if (alt >= 2 and el_geo >= 3 and moonage >= 8) else (t0 + timedelta(days=2))
-        elif kriteria == "NEO MABIMS":
-            jd = (t0 + timedelta(days=1)) if (alt >= 3 and el_geo >= 6.4) else (t0 + timedelta(days=2))
+            parameter = "Mudah teramati tanpa alat bantu optik"
+        elif (q < 5.65 and q >= 2):
+            parameter = "Mungkin teramati tanpa alat bantu optik"
+        elif (q < 2 and q >= -0.96):
+            parameter = "Terlihat hanya dengan alat bantu optik"
+        elif (q < -0.96):
+            parameter = "Tidak terlihat"
 
-
-        return JDE
+        return best_time, q, parameter
 
     def cetak(self):
         bln_h = fungsi.hijriah().bulan_hijriah(self.bulan)
