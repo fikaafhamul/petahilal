@@ -35,7 +35,7 @@ class awalbulan:
         self.newmoon = self.new_moon()  # Mengambil nilai konjungsi saat inisialisasi
         self.moonrise_moonset = self.rise_set_moon()
         self.konjungsi, self.jd, self.sunset, self.moonset, self.altitude, self.elongasi, self.moonage= self.calculate_hilal()  # Simpan hasil ke atribut
-        self.jam, self.suhu, self.kelembapan, self.kecepatan, self.arahangin, self.jarakpandang = self.weather()
+        self.jam, self.suhu, self.kelembapan, self.kecepatan, self.arahangin, self.jarakpandang, self.situasi = self.weather()
         self.cetak = self.cetak()
 	    
     def hitung_jde(self):
@@ -233,6 +233,11 @@ class awalbulan:
             arah = []
             for data in ar:
                 arah.append(data.text)
+
+            kn = soup.find_all('p', class_='text-sm md:text-lg font-bold mt-4')
+            situasi = []
+            for data in ar:
+                situasi.append(data.text)
         else:
             print("Gagal mengambil data cuaca")
 
@@ -246,7 +251,7 @@ class awalbulan:
             kec = kondisi[j*3+1]
             jarak = kondisi[j*3+1]
 		
-        return jam[j], suhu[j], kelembapan, kec, arah[j+4], jarak
+        return jam[j], suhu[j], kelembapan, kec, arah[j+4], jarak, situasi[j]
 
     def cetak(self):
         bln_h = fungsi.hijriah().bulan_hijriah(self.bulan)
@@ -354,6 +359,7 @@ class awalbulan:
         else:
         	print ('- Prakiraan cuaca pada jam ' + self.jam)
         print ('   - Suhu: ' + self.suhu)
+        print ('   - Kondisi Langit: ' + self.situasi)
         print ('   - Kelembapan: ' + self.kelembapan)
         print ('   - Kecepatan Angin: ' + self.kecepatan)
         print ('   - Arah Angin: ' + self.arahangin)
