@@ -19,7 +19,7 @@ def visibilitas_oddeh(sunset, lag, separasi, lebar_sabit):
     best_time = sunset + 4/9 * lag
 		    
     # Menghitung q
-    lebar_sabit = lebar_sabit	    
+    lebar_sabit = lebar_sabit * 60	    
     q = separasi - (-0.1018 * (lebar_sabit ** 3) + 0.7319 * (lebar_sabit ** 2) - 6.3226 * lebar_sabit + 7.1651)
 
     # Parameter
