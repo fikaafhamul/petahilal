@@ -35,6 +35,7 @@ class awalbulan:
         self.newmoon = self.new_moon()  # Mengambil nilai konjungsi saat inisialisasi
         self.moonrise_moonset = self.rise_set_moon()
         self.konjungsi, self.jd, self.sunset, self.moonset, self.altitude, self.elongasi, self.moonage= self.calculate_hilal()  # Simpan hasil ke atribut
+	self.jam, self.suhu, self.kelembapan, self.kecepatan, self.arahangin, self.jarakpandang = self.weather()
         self.cetak = self.cetak()
 	    
     def hitung_jde(self):
@@ -348,6 +349,15 @@ class awalbulan:
         	print ('   - Time zone: ' + self.TZ + ' '+ str(delta_time_tz))
         else:
         	print ('   - Time zone: ' + self.TZ + ' +'+ str(delta_time_tz))
+	if self.id_cuaca == " ":
+        	print ('')
+        else:
+        	print ('- Prakiraan cuaca pada jam ' + self.jam)
+        print ('   - Suhu: ' + self.suhu)
+        print ('   - Kelembapan: ' + self.kelembapan)
+        print ('   - Kecepatan Angin: ' + self.kecepatan)
+        print ('   - Arah Angin: ' + self.arah)
+        print ('   - Jarak Pandang: ' + self.jarak)
         print (f'{"".join(["="]*120)} \n')
         print ('- Waktu Konjungsi         : %d %s %d M %02d:%02d:%02d LT' % (konjungsi.day,n1_bln,konjungsi.year,konjungsi.hour,konjungsi.minute,konjungsi.second))
         print ('- Waktu Matahari Terbenam : %02d:%02d:%02d                          - Waktu Bulan Terbenam             : %02d:%02d:%02d' % (sunset.hour,sunset.minute,sunset.second, moonset.hour,moonset.minute,moonset.second))
