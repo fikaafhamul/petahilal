@@ -6,12 +6,14 @@ from datetime import timedelta
 from pytz import timezone
 from math import sin, cos, asin, degrees, radians
 from . import fungsi
+import requests
+from bs4 import BeautifulSoup
 
 ts = api.load.timescale()
 e = api.load('de440s.bsp')  # Menggunakan ephemeris DE440s
 
 class awalbulan:
-    def __init__(self, bulan, tahun, lok, lat, lon, TZ='Asia/Jakarta', TT = 0, TH = 0, kriteria = 'NEO MABIMS'):
+    def __init__(self, bulan, tahun, lok, lat, lon, TZ='Asia/Jakarta', TT = 0, TH = 0, kriteria = 'NEO MABIMS', id_cuaca = ' ', jam_cuaca = '16.00 WIB'):
         self.bulan = bulan
         self.tahun = tahun
         if self.bulan < 2:
@@ -27,6 +29,8 @@ class awalbulan:
         self.TT = TT
         self.TH = TH
         self.kriteria = kriteria
+        self.id_cuaca = id_cuaca
+        self.jam_cuaca = jam_cuaca
         self.JDE = self.hitung_jde()  # Menghitung JDE saat inisialisasi
         self.newmoon = self.new_moon()  # Mengambil nilai konjungsi saat inisialisasi
         self.moonrise_moonset = self.rise_set_moon()
@@ -196,6 +200,37 @@ class awalbulan:
         el_topo = topo_sun.separation_from(topo_moon).degrees
 	    
         return konjungsi_times, jd, sunset_time_local, moonset_time_local, alt, el_topo, moonage
+
+    def weather(self):
+        url = f"https://www.bmkg.go.id/cuaca/prakiraan-cuaca/{self.id_cuaca}"
+
+        # Mengirim permintaan HTTP
+        response = requests.get(url)
+
+        # Memeriksa apakah permintaan berhasil
+        if response.status_code == 200:
+            # Mem-parsing konten HTML
+            soup = BeautifulSoup(response.content, 'html.parser')
+
+            # Mencari elemen yang berisi data cuaca
+            c = soup.find_all('p', class_='text-[32px] leading-[48px] md:text-[48px] md:leading-[62px] font-bold')         
+            suhu = []
+            for data in c:
+                suhu.append(data.text)
+
+            j = soup.find_all('h4', class_='text-base leading-[25px] md:text-2xl font-bold') 
+            jam = []
+            for data in j:
+                jam.append(data.text)
+    
+            k = soup.find_all('p', class_='text-black-primary font-bold text-xs md:text-base md:leading-[25px] gap-2')
+            kondisi = []
+            for data in k:
+                kondisi.append(data.text)
+    
+        else:
+            print("Gagal mengambil data cuaca")
+        return 
 
     def cetak(self):
         bln_h = fungsi.hijriah().bulan_hijriah(self.bulan)
