@@ -380,7 +380,7 @@ class awalbulan:
         	print ('   - Time zone: ' + self.TZ + ' +'+ str(delta_time_tz))
 		
         print ('- Visibilitas Oddeh ')
-        print ('   - Best Time: %s' % (fungsi.konversi(best_time,"JAM")))
+        print ('   - Best Time: %s' % (fungsi.konversi(best_time,"JAM").result))
         print ('   - q: ' + str(round(q,2)))
         print ('   - Parameter: ' + parameter)
 	    
