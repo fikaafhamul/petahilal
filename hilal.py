@@ -238,13 +238,13 @@ class awalbulan:
 
         j = jam.index(self.jam_cuaca)
         if j == 0:
-		kelembapan = kondisi[j]
-		kec = kondisi[j+1]
-		jarak = kondisi[j+2]
-	else:
-		kelembapan = kondisi[j*3]
-		kec = kondisi[j*3+1]
-		jarak = kondisi[j*3+1]
+            kelembapan = kondisi[j]
+            kec = kondisi[j+1]
+            jarak = kondisi[j+2]
+        else:
+            kelembapan = kondisi[j*3]
+            kec = kondisi[j*3+1]
+            jarak = kondisi[j*3+1]
 		
         return jam[j], suhu[j], kelembapan, kec, arah[j+4], jarak
 
