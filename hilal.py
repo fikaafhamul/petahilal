@@ -36,7 +36,7 @@ class awalbulan:
         self.moonrise_moonset = self.rise_set_moon()
         self.konjungsi, self.jd, self.sunset, self.moonset, self.altitude, self.elongasi, self.moonage= self.calculate_hilal()  # Simpan hasil ke atribut
         self.jam, self.suhu, self.kelembapan, self.kecepatan, self.arahangin, self.jarakpandang, self.situasi = self.weather()
-        self.best, self.q, self.parameter = visibilitas_oddeh()
+        self.best, self.q, self.parameter = self.visibilitas_oddeh()
         self.cetak = self.cetak()
 	    
     def hitung_jde(self):
