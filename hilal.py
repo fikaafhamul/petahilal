@@ -56,11 +56,11 @@ class awalbulan:
         else:
             self.id_cuaca = id_cuaca
             self.jam_cuaca = jam_cuaca
+            self.jam, self.suhu, self.kelembapan, self.kecepatan, self.arahangin, self.jarakpandang, self.situasi = self.weather()
         self.JDE = self.hitung_jde()  # Menghitung JDE saat inisialisasi
         self.newmoon = self.new_moon()  # Mengambil nilai konjungsi saat inisialisasi
         self.moonrise_moonset = self.rise_set_moon()
         self.konjungsi, self.jd, self.sunset, self.moonset, self.altitude, self.elongasi, self.moonage= self.calculate_hilal()  # Simpan hasil ke atribut
-        self.jam, self.suhu, self.kelembapan, self.kecepatan, self.arahangin, self.jarakpandang, self.situasi = self.weather()
         self.cetak = self.cetak()
 	    
     def hitung_jde(self):
