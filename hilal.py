@@ -225,7 +225,7 @@ class awalbulan:
 	    
         return konjungsi_times, jd, sunset_time_local, moonset_time_local, alt, el_topo, moonage
 
-    if id_cuaca != '':
+    if self.id_cuaca = '':
 	    def weather(self):
 	        url = f"https://www.bmkg.go.id/cuaca/prakiraan-cuaca/{self.id_cuaca}"
 	
