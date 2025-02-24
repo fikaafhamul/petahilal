@@ -390,7 +390,7 @@ class awalbulan:
         print ('   - q        : ' + str(round(q,2)))
         print ('   - Parameter: ' + parameter)
 	    
-        if self.id_cuaca == " ":
+        if self.id_cuaca == "":
         	print ('')
         else:
         	print ('- Prakiraan cuaca pada jam ' + self.jam)
