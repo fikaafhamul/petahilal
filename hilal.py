@@ -52,7 +52,7 @@ class awalbulan:
         self.TH = TH
         self.kriteria = kriteria
         if id_cuaca !=" ":
-
+            
         else:
             self.id_cuaca = id_cuaca
             self.jam_cuaca = jam_cuaca
