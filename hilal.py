@@ -227,7 +227,7 @@ class awalbulan:
 	    
         return konjungsi_times, jd, sunset_time_local, moonset_time_local, alt, el_topo, moonage
 
-    if self.id_cuaca == "":
+    if id_cuaca == "":
 	    pass
     else:
 	    def weather(self):
