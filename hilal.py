@@ -35,7 +35,7 @@ def visibilitas_oddeh(sunset, lag, separasi, lebar_sabit):
     return best_time, q, parameter
 
 class awalbulan:
-    def __init__(self, bulan, tahun, lok, lat, lon, TZ='Asia/Jakarta', TT = 0, TH = 0, kriteria = 'NEO MABIMS', id_cuaca = ' ', jam_cuaca = '16.00 WIB'):
+    def __init__(self, bulan, tahun, lok, lat, lon, TZ='Asia/Jakarta', TT = 0, TH = 0, kriteria = 'NEO MABIMS', id_cuaca = ' ', jam_cuaca = ' '):
         self.bulan = bulan
         self.tahun = tahun
         if self.bulan < 2:
@@ -51,8 +51,9 @@ class awalbulan:
         self.TT = TT
         self.TH = TH
         self.kriteria = kriteria
-        self.id_cuaca = id_cuaca
-        self.jam_cuaca = jam_cuaca
+        if id_cuaca !=" ":
+            self.id_cuaca = id_cuaca
+            self.jam_cuaca = jam_cuaca
         self.JDE = self.hitung_jde()  # Menghitung JDE saat inisialisasi
         self.newmoon = self.new_moon()  # Mengambil nilai konjungsi saat inisialisasi
         self.moonrise_moonset = self.rise_set_moon()
