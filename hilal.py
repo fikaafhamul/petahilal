@@ -52,6 +52,8 @@ class awalbulan:
         self.TH = TH
         self.kriteria = kriteria
         if id_cuaca !=" ":
+
+        else:
             self.id_cuaca = id_cuaca
             self.jam_cuaca = jam_cuaca
         self.JDE = self.hitung_jde()  # Menghitung JDE saat inisialisasi
