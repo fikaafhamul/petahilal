@@ -51,7 +51,9 @@ class awalbulan:
         self.TT = TT
         self.TH = TH
         self.kriteria = kriteria
-        if id_cuaca != '':
+        if id_cuaca == '':
+            self.id_cuaca = 1
+        else:
             self.id_cuaca = id_cuaca
             self.jam_cuaca = jam_cuaca
         self.JDE = self.hitung_jde()  # Menghitung JDE saat inisialisasi
@@ -225,7 +227,7 @@ class awalbulan:
 	    
         return konjungsi_times, jd, sunset_time_local, moonset_time_local, alt, el_topo, moonage
 
-    if self.id_cuaca == '':
+    if self.id_cuaca != 1:
 	    def weather(self):
 	        url = f"https://www.bmkg.go.id/cuaca/prakiraan-cuaca/{self.id_cuaca}"
 	
