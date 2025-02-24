@@ -52,7 +52,7 @@ class awalbulan:
         self.TH = TH
         self.kriteria = kriteria
         if id_cuaca == '':
-            self.id_cuaca = 1
+            self.id_cuaca = ""
         else:
             self.id_cuaca = id_cuaca
             self.jam_cuaca = jam_cuaca
@@ -227,10 +227,10 @@ class awalbulan:
 	    
         return konjungsi_times, jd, sunset_time_local, moonset_time_local, alt, el_topo, moonage
 
-    if id_cuaca == "":
-	    pass
-    else:
-	    def weather(self):
+    def weather(self):
+        if self.id_cuaca = "":
+	        pass
+        else:
 	        url = f"https://www.bmkg.go.id/cuaca/prakiraan-cuaca/{self.id_cuaca}"
 	
 	        # Mengirim permintaan HTTP
